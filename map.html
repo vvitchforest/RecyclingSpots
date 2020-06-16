@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Kierrätyspisteiden etsijä">
+    <meta name="keywords" content="Kierrätys, Kierrätyspisteet">
+    <meta name="author" content="Irina Konovalova, Pauli Vuolle-Apiala">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartta</title>
+    <link href="CSS/map.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css?family=Segoe+UI" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9fb894e06e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <img src="#" alt="logo" class="logo">
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">
+                        <div class="icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="icon_name" data-text="KARTTA">KARTTA</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="icon_name" data-text="INFO">INFO</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="icon">
+                            <i class="fas fa-shoe-prints"></i>
+                        </div>
+                        <div class="icon_name" data-text="LASKURI">LASKURI</div>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div id="mapview"></div>
+    <aside class="aside">
+        <div class="search_container">
+            <input id="input" placeholder="Hae sijainti">
+            <button id="search_button"></button>
+        </div>
+        <div class="filter_container">
+            <p>Valitse etäisyys</p>
+            <div id="distance_scale"></div>
+            <p>Valitse materiaalit</p>
+            <div id="filter"></div>
+        </div>
+    </aside>
+
+
+</main>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+<script src="JS/map.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+/*---------------------------------BODY-------------------------------------------*/
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    display:flex;
+    flex-wrap: wrap;
+}
