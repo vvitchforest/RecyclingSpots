@@ -24,7 +24,6 @@ header::after {
 }
 
 nav {
-
     display: flex;
     justify-content: flex-start;
     margin-left: 120px;
@@ -42,7 +41,6 @@ nav li {
     margin-left: 100px;
     padding: 25px 0;
     position:relative;
-
 }
 
 nav a {
@@ -92,14 +90,13 @@ aside {
     background-color: #91CB3E;
     width: 20%;
     height:100%;
-
 }
 
 #mapview {
     float: right;
-    background-color: magenta;
     width: 80%;
     height: 100%;
+
 }
 
 
