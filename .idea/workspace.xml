@@ -13,6 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -21,18 +23,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cWqXUMs4LFMEraMXCMZ1P3YND7" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/corona-web-project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WebProjekti" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -45,18 +47,22 @@
       <option name="presentableId" value="Default" />
       <updated>1590654736592</updated>
       <workItem from="1590654740291" duration="295000" />
-      <workItem from="1592303228403" duration="84000" />
-      <workItem from="1592303341188" duration="595000" />
+      <workItem from="1591957464789" duration="2000" />
+      <workItem from="1592037067771" duration="6000" />
+      <workItem from="1592044706682" duration="15897000" />
+      <workItem from="1592232927477" duration="8508000" />
+      <workItem from="1592302965900" duration="2294000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1591699828587">
+    <state x="570" y="193" key="FileChooserDialogImpl" timestamp="1592304051352">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591699828587" />
+    <state x="570" y="193" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592304051352" />
+    <state x="634" y="216" key="FileChooserDialogImpl/0.0.1707.920@0.0.1707.920" timestamp="1592044797947" />
   </component>
 </project>
