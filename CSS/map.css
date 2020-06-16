@@ -4,13 +4,14 @@ body {
     font-weight: 400;
 }
 
- header .container {
+header .container {
     width: 80%;
     margin: 0 auto;
 }
 
 header {
-    background:#424A45;
+    background: #424A45;
+    height: 15vh;
 }
 
 header::after {
@@ -24,11 +25,10 @@ header::after {
 }
 
 nav {
-
     display: flex;
     justify-content: flex-start;
     margin-left: 120px;
-    height: 15vh;
+
 }
 
 nav ul {
@@ -38,16 +38,16 @@ nav ul {
 }
 
 nav li {
-    display:inline-block;
+    display: inline-block;
     margin-left: 100px;
     padding: 25px 0;
-    position:relative;
+    position: relative;
 
 }
 
 nav a {
     color: white;
-    text-decoration:none;
+    text-decoration: none;
     font-size: 18px;
 
 }
@@ -61,7 +61,6 @@ ul li a .icon {
 
 ul li a .icon .fas {
     color: #91CB3E;
-
 }
 
 nav a:hover {
@@ -69,18 +68,18 @@ nav a:hover {
 }
 
 nav a::before {
-    content:'';
+    content: '';
     display: block;
-    height:5px;
+    height: 5px;
     width: 0;
     background-color: #91CB3E;
-    position:absolute;
+    position: absolute;
     top: 0;
-    transition:all ease-in-out 200ms;
+    transition: all ease-in-out 200ms;
 }
 
 nav a:hover::before {
-    width:100%;
+    width: 100%;
 }
 
 main {
@@ -88,11 +87,34 @@ main {
 }
 
 aside {
-    float:left;
-    background-color: #91CB3E;
+    float: left;
     width: 20%;
-    height:100%;
+    height: 100%;
+}
 
+.search_container {
+    background-color: #91CB3E;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.distance_container {
+    background-color: white;
+    height: 20%;
+    display: flex;
+    color: #424A45;
+    font-weight: 600;
+    border: 2px solid black;
+}
+
+.distance_container p {
+    margin-left: 55px;
+}
+
+.filter_container {
+    height: 55%;
 }
 
 #mapview {
@@ -102,4 +124,28 @@ aside {
     height: 100%;
 }
 
+i {
+    font-size: 2em;
+}
 
+.icon_name {
+    padding: 10px 0;
+}
+
+#searchfield{
+    height: 30px;
+    width: 200px;
+    display:flex;
+
+
+}
+
+#input {
+
+}
+
+#search_button {
+    width: 50px;
+
+
+}
