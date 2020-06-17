@@ -91,6 +91,13 @@ aside {
     height: 100%;
 }
 
+aside .title {
+    color: #424A45;
+    font-weight: 600;
+    margin-left: 55px;
+
+}
+
 .search_container {
     background-color: #91CB3E;
     height: 10%;
@@ -102,22 +109,17 @@ aside {
 .distance_container {
     background-color: white;
     height: 20%;
-    color: #424A45;
-    font-weight: 600;
     border: 2px solid black;
 
 
 }
 
-.distance_container p {
-    margin-left: 55px;
-
-
-}
 
 .filter_container {
     height: 55%;
 }
+
+
 
 #mapview {
     float: right;
