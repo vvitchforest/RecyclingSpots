@@ -21,7 +21,10 @@ fetch(
     }).then(function(data) {
   console.log(data);
   for (let i = 0; i < data.results.length; i++) {
-    filterUl.innerHTML += `<li><input type="checkbox" value="${data.results[i].code}"> ${data.results[i].name}</li>`;
+    filterUl.innerHTML += `<label class="container">${data.results[i].name}
+  <input type="checkbox" checked="checked">
+  <span class="checkmark"></span>
+</label>`;
   }
 }).catch(function(error) {
   console.log(error);
