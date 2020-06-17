@@ -64,7 +64,10 @@
         </div>
         <div class="distance_container">
             <p>Valitse etäisyys</p>
-
+            <div class="slider_container">
+                <input type="range" min="1" max="100" value="50" class="slider" id="slider_id">
+                <p>Distance: <span id="value"></span> km</p>
+            </div>
         </div>
         <div class="filter_container">
             <div id="distance_scale"></div>
@@ -72,8 +75,6 @@
             <div id="filter"></div>
         </div>
     </aside>
-
-
 </main>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
