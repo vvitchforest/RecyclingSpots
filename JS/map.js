@@ -38,12 +38,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 function showMap(crd) {
-  map.setView([crd.latitude, crd.longitude], 8);
+  map.setView([crd.latitude, crd.longitude], 12);
 }
 
 function userLocation(pos) {
   myLocation = pos.coords;
   showMap(myLocation);
+  addMarker(myLocation, 'Olen tässä')
 }
 
 function error(err) {
@@ -51,6 +52,12 @@ function error(err) {
 }
 
 navigator.geolocation.getCurrentPosition(userLocation, error);
+
+function addMarker(crd, text) {
+  L.marker([crd.latitude, crd.longitude]).addTo(map)
+  .bindPopup(text)
+  .openPopup();
+}
 
 //--------------------------FETCHING DATA FROM API---------------------------//
 
