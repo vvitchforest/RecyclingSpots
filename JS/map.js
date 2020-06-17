@@ -1,15 +1,31 @@
 'use strict';
 
-//-----------------------------ANIMATIONS-----------------------------------//
+//-----------------------------FILTERS-----------------------------------//
 
 /*Slider*/
 let slider = document.getElementById('slider_id');
 let output = document.getElementById('value');
 
 output.innerHTML = slider.value;
-slider.oninput =function() {
+slider.oninput = function() {
   output.innerHTML = this.value;
-}
+};
+
+/*Checkboxes*/
+const filterUl = document.getElementById('filter_ul');
+
+fetch(
+    `https://api.kierratys.info/materialtypes/?api_key=d77219adedf77de9a97e20d8bcbf436f354cc01d`).
+    then(function(response) {
+      return response.json();
+    }).then(function(data) {
+  console.log(data);
+  for (let i = 0; i < data.results.length; i++) {
+    filterUl.innerHTML += `<li><input type="checkbox" value="${data.results[i].code}"> ${data.results[i].name}</li>`;
+  }
+}).catch(function(error) {
+  console.log(error);
+});
 
 //---------------------------SETTING UP THE MAP VIEW------------------------//
 
@@ -37,3 +53,5 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(userLocation, error);
 
 //--------------------------FETCHING DATA FROM API---------------------------//
+
+

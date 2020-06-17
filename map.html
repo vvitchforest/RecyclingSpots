@@ -66,12 +66,16 @@
             <p class="title">Valitse etäisyys</p>
             <div class="slider_container">
                 <input type="range" min="1" max="100" value="50" class="slider" id="slider_id">
-                <p>Distance: <span id="value"></span> km</p>
+
             </div>
+            <p id="distance">Distance: <span id="value"></span> km</p>
         </div>
         <div class="filter_container">
             <p class="title">Valitse materiaalit</p>
-            <div id="filter"></div>
+            <div id="filter">
+                <ul id="filter_ul">
+                </ul>
+            </div>
         </div>
     </aside>
 </main>
