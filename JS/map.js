@@ -1,16 +1,6 @@
 'use strict';
 
 //-----------------------------FILTERS-----------------------------------//
-
-/*Slider*/
-let slider = document.getElementById('slider_id');
-let output = document.getElementById('value');
-
-output.innerHTML = slider.value;
-slider.oninput = function() {
-  output.innerHTML = this.value;
-};
-
 /*Checkboxes*/
 const filterUl = document.getElementById('filter_ul');
 
@@ -69,7 +59,8 @@ const searchInput = document.getElementById('input');
 const searchButton = document.getElementById('search_button');
 
 searchButton.addEventListener('click', function() {
-  searchCity();
+  let searchByCity = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&municipality=${searchInput.value}`;
+  search(searchByCity);
 });
 
 searchInput.addEventListener('keyup', function(e) {
@@ -79,9 +70,26 @@ searchInput.addEventListener('keyup', function(e) {
   }
 });
 
-function searchCity() {
-  fetch(
-      `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&municipality=${searchInput.value}`).
+/*Search by distance*/
+
+let slider = document.getElementById('slider_id');
+let output = document.getElementById('value');
+let filterButton = document.getElementById('filter_button');
+
+output.innerHTML = slider.value;
+slider.oninput = function() {
+  output.innerHTML = this.value;
+};
+
+filterButton.addEventListener('click', function() {
+  let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
+  1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
+  search(searchByDistance);
+});
+
+function search(apiSearchUrl) {
+  fetch(apiSearchUrl,
+  ).
       then(function(response) {
         return response.json();
       }).then(function(data) {
@@ -100,15 +108,17 @@ function searchCity() {
         console.log(recycleMaterial);
       }
 
-      const popupInfo = `<h5>${data.results[i].name}</h5>
+      let popupInfo = `<h5>${data.results[i].name}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
-                         ${recycleMaterial}
-                         <h5>Yhteystiedot: </h5>
-                         ${data.results[i].contact_info}
-                         </p>           
+                         ${recycleMaterial}</p>                                 
 `;
+
+      if (data.results[i].contact_info !== '') {
+        popupInfo += `<h5>Yhteystiedot: </h5>
+                      <p>${data.results[i].contact_info}</p>`;
+      }
 
       addMarker(coords, popupInfo);
     }
