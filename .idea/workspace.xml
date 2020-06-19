@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b15aac3-5985-4d5a-9cc0-220d7e8dcd7b" name="Default Changelist" comment="" />
+    <list default="true" id="4b15aac3-5985-4d5a-9cc0-220d7e8dcd7b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EnvironmentProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EnvironmentProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JS/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/JS/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map.html" beforeDir="false" afterPath="$PROJECT_DIR$/map.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +25,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="1cWqXUMs4LFMEraMXCMZ1P3YND7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -28,9 +40,12 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/web_tekniikat/sahkoauto-master" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -51,6 +66,7 @@
       <workItem from="1592339461734" duration="1125000" />
       <workItem from="1592377873227" duration="4858000" />
       <workItem from="1592470203921" duration="14567000" />
+      <workItem from="1592575639042" duration="941000" />
     </task>
     <servers />
   </component>
@@ -58,10 +74,18 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="498" y="192" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1592575513435">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="192" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1536.824@0.0.1536.824" timestamp="1592575513435" />
     <state x="570" y="193" key="FileChooserDialogImpl" timestamp="1592417381280">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="570" y="193" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592417381280" />
     <state x="634" y="216" key="FileChooserDialogImpl/0.0.1707.920@0.0.1707.920" timestamp="1592044797947" />
+    <state x="277" y="55" key="SettingsEditor" timestamp="1592575580454">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592575580454" />
   </component>
 </project>
