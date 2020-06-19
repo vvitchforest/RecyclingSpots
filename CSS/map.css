@@ -4,14 +4,15 @@ body {
     font-weight: 400;
 }
 
-header .container {
+header .header_container {
     width: 80%;
     margin: 0 auto;
+    height: inherit;
 }
 
 header {
     background: #424A45;
-    height: 15vh;
+    height: 10vh;
 }
 
 header::after {
@@ -25,30 +26,27 @@ header::after {
 }
 
 nav {
-    display: flex;
-    justify-content: flex-start;
     margin-left: 120px;
-
+    height: inherit;
 }
 
 nav ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    height: inherit;
 }
 
 nav li {
     display: inline-block;
     margin-left: 100px;
-    padding: 25px 0;
     position: relative;
+    height: inherit;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
-
 }
 
 ul li a .icon {
@@ -56,10 +54,13 @@ ul li a .icon {
     width: 40px;
     text-align: center;
     margin: 0 auto;
+    padding: 8px 0;
+
 }
 
 ul li a .icon .fas {
     color: #91CB3E;
+    font-size: 1.5em;
 }
 
 nav a:hover {
@@ -88,7 +89,7 @@ main {
 aside {
     float: left;
     width: 20%;
-    height: 100%;
+    height: 90vh;
 }
 
 aside .title {
@@ -96,7 +97,12 @@ aside .title {
     font-weight: 600;
     margin-left: 55px;
     height: 10px;
+    margin-top: 0.5vh;
+    padding-bottom: 1vh;
+}
 
+#material_title{
+    padding-top: 1.5vh;
 }
 
 .search_container {
@@ -117,28 +123,46 @@ aside .title {
     text-align: center;
 }
 
-#material_title {
-    padding-bottom: 5px;
-}
-
 .filter_container {
-    height: 67.5%;
+    height: 58%;
     overflow:hidden;
     overflow-y:scroll;
+}
+
+#filter_button_container {
+    height: 12%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#filter_button {
+    height: 30px;
+    width: 200px;
+    border-radius: 25px;
+    background-color: #91CB3E;
+    font-size: 1em;
+    color: white;
+    font-weight: 400;
+    border: #424A45;
+    font-family: "Segoe UI", sans-serif;
+    box-shadow: 5px 6px 15px darkgrey;
+    line-height: 1em;
+    text-align: center;
 }
 
 #mapview {
     float: right;
     width: 80%;
-    height: 100%;
+    height: 90vh;
 }
 
-i {
-    font-size: 2em;
-}
 
 .icon_name {
-    padding: 10px 0;
+    font-size: 1.8vh;
+    margin-top: -5px;
+    text-align: center;
 }
 
 #searchfield {
