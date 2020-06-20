@@ -15,38 +15,14 @@ fetch(
   <span class="checkmark"></span>
 </label>`;
   }
+
+  $("#check_all").on(`click`, function () {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
 }).catch(function(error) {
   console.log(error);
 });
-
-const checkAllBoxes = document.getElementById(`check_all`);
-
-$(document).ready(function(){
-  // Check or Uncheck All checkboxes
-  $("#check_all").change(function(){
-    let checked = $(this).is(':checked');
-    if(checked){
-      $(".checkboxes").each(function(){
-        $(this).prop("checked",true);
-      });
-    }else{
-      $(".checkboxes").each(function(){
-        $(this).prop("checked",false);
-      });
-    }
-  });
-
-  // Changing state of CheckAll checkbox
-  $(".checkboxes").click(function(){
-
-    if($(".checkboxes").length === $(".checkboxes:checked").length) {
-      $("#check_all").prop("checked", true);
-    } else {
-      $("#check_all").removeAttr("checked");
-    }
-  });
-});
-  
 
 //---------------------------SETTING UP THE MAP VIEW------------------------//
 
@@ -118,43 +94,48 @@ filterButton.addEventListener('click', function() {
 });
 
 function search(apiSearchUrl) {
-  fetch(apiSearchUrl,
-  ).
-      then(function(response) {
-        return response.json();
-      }).then(function(data) {
-    console.log(data);
 
-    for (let i = 0; i < data.results.length; i++) {
+  if ($("#filter_ul :checkbox:checked").length === 0) {
+    alert("You have to check at least one box");
+  } else {
+    fetch(apiSearchUrl,
+    ).
+        then(function(response) {
+          return response.json();
+        }).then(function(data) {
+      console.log(data);
 
-      const coords = {
-        longitude: data.results[i].geometry.coordinates[0],
-        latitude: data.results[i].geometry.coordinates[1],
-      };
+      for (let i = 0; i < data.results.length; i++) {
 
-      let recycleMaterial = [];
-      for (let j = 0; j < data.results[i].materials.length; j++) {
-        recycleMaterial += data.results[i].materials[j].name + '<br>';
-      }
-      //console.log(recycleMaterial);
-      let popupInfo = `<h5>${data.results[i].name}</h5>
+        const coords = {
+          longitude: data.results[i].geometry.coordinates[0],
+          latitude: data.results[i].geometry.coordinates[1],
+        };
+
+        let recycleMaterial = [];
+        for (let j = 0; j < data.results[i].materials.length; j++) {
+          recycleMaterial += data.results[i].materials[j].name + '<br>';
+        }
+        //console.log(recycleMaterial);
+        let popupInfo = `<h5>${data.results[i].name}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
                          ${recycleMaterial}</p>                                 
 `;
 
-      if (data.results[i].contact_info !== '') {
-        popupInfo += `<h5>Yhteystiedot: </h5>
+        if (data.results[i].contact_info !== '') {
+          popupInfo += `<h5>Yhteystiedot: </h5>
                       <p>${data.results[i].contact_info}</p>`;
+        }
+
+        addMarker(coords, popupInfo);
       }
 
-      addMarker(coords, popupInfo);
-    }
-
-  }).catch(function(error) {
-    console.log(error);
-  });
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
 }
 
 function checkboxes(apiURL) {
