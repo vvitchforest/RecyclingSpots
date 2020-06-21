@@ -101,6 +101,34 @@ aside .title {
     padding-bottom: 1vh;
 }
 
+.buttons_div{
+    height: 7vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_buttons {
+    display: block;
+    width: 100%;
+    border: 1px solid #424A45;
+    height: 100%;
+    float: top;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+}
+
+#search_button_at_top {
+    background-color: #91CB3E;
+}
+
+#locate_button {
+    background-color: lightgray;
+}
+
 #material_title{
     padding-top: 1.5vh;
 }
@@ -116,6 +144,7 @@ aside .title {
 .distance_container {
     background-color: white;
     height: 12%;
+    display: none;
 }
 
 #distance {
@@ -130,7 +159,7 @@ aside .title {
 }
 
 #filter_button_container {
-    height: 12%;
+    height: 12.5%;
     width: 100%;
     display: flex;
     align-items: center;
@@ -212,6 +241,11 @@ aside .title {
 }
 
 /*CUSTOM CHECKBOXES*/
+
+#check_all_label {
+    font-weight: 700;
+    padding-bottom: 1vh;
+}
 /* Customize the label (the container) */
 .container {
     display: block;

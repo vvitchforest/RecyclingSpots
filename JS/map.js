@@ -11,13 +11,17 @@ fetch(
     }).then(function(data) {
   for (let i = 0; i < data.results.length; i++) {
     filterUl.innerHTML += `<label class="container">${data.results[i].name}
-  <input class="checkboxes" type="checkbox" checked="checked" value="${data.results[i].code}">
+  <input class="checkboxes" type="checkbox" value="${data.results[i].code}">
   <span class="checkmark"></span>
 </label>`;
   }
 
-  $("#check_all").on(`click`, function () {
-    $('input:checkbox').not(this).prop('checked', this.checked);
+  $('#check_all').on(`click`, function() {
+    $('input:checkbox').not(this).prop('checked', false);
+  });
+
+  $(`.checkboxes`).on(`click`, function() {
+    $(`#check_all`).prop(`checked`, false);
   });
 
 }).catch(function(error) {
@@ -41,7 +45,10 @@ function showMap(crd) {
 function userLocation(pos) {
   myLocation = pos.coords;
   showMap(myLocation);
-  addMarker(myLocation, 'Olen tässä');
+  L.marker([myLocation.latitude, myLocation.longitude]).
+      addTo(map).
+      bindPopup('Olen tässä').
+      openPopup();
 }
 
 function error(err) {
@@ -94,10 +101,10 @@ filterButton.addEventListener('click', function() {
 });
 
 function search(apiSearchUrl) {
-
-  if ($("#filter_ul :checkbox:checked").length === 0) {
-    alert("You have to check at least one box");
+  if ($('#filter_ul :checkbox:checked').length === 0) {
+    alert('You have to check at least one box');
   } else {
+    LayerGroup.clearLayers();
     fetch(apiSearchUrl,
     ).
         then(function(response) {
