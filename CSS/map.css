@@ -130,18 +130,18 @@ aside .title {
 }
 
 #material_title{
-    padding-top: 1.5vh;
+padding-top: 1.5vh;
 }
 
-.search_container {
+#search_container {
     background-color: #91CB3E;
-    height: 10%;
+    height: 12%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.distance_container {
+#distance_container {
     background-color: white;
     height: 12%;
     display: none;

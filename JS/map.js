@@ -1,5 +1,36 @@
 'use strict';
 
+//----------------------------BUTTONS--------------------------------------//
+
+let searchButtonTop = document.getElementById('search_button_at_top');
+let locateButton = document.getElementById('locate_button');
+let distanceContainer = document.getElementById('distance_container');
+let searchContainer = document.getElementById('search_container');
+
+locateButton.addEventListener('click', function() {
+  showContainer(distanceContainer, searchContainer, false);
+});
+
+searchButtonTop.addEventListener('click', function() {
+  showContainer(searchContainer, distanceContainer, true);
+});
+
+function showContainer(containerShow, containerHide, flexDisplay) {
+  if (flexDisplay === false) {
+    if (containerShow.style.display === 'none' ||
+        containerShow.style.display === '') {
+      containerShow.style.display = 'block';
+      containerHide.style.display = 'none';
+    }
+  } else {
+    if (containerShow.style.display === 'none' ||
+        containerShow.style.display === '') {
+      containerShow.style.display = 'flex';
+      containerHide.style.display = 'none';
+    }
+  }
+}
+
 //-----------------------------FILTERS-----------------------------------//
 /*Checkboxes*/
 const filterUl = document.getElementById('filter_ul');
@@ -72,8 +103,7 @@ const searchButton = document.getElementById('search_button');
 
 searchButton.addEventListener('click', function() {
   let searchByCity = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&municipality=${searchInput.value}`;
-  search(searchByCity);
-
+  search(checkboxes(searchByCity));
 });
 
 searchInput.addEventListener('keyup', function(e) {
@@ -94,11 +124,11 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 };
 
-filterButton.addEventListener('click', function() {
+/*filterButton.addEventListener('click', function() {
   let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
   1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
   search(checkboxes(searchByDistance));
-});
+}); */
 
 function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
