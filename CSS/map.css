@@ -97,7 +97,7 @@ aside .title {
     font-weight: 600;
     margin-left: 55px;
     height: 10px;
-    margin-top: 0.5vh;
+    margin-top: 0;
     padding-bottom: 1vh;
 }
 
@@ -133,6 +133,7 @@ aside .title {
 padding-top: 1.5vh;
 }
 
+
 #search_container {
     background-color: #91CB3E;
     height: 12%;
@@ -154,8 +155,12 @@ padding-top: 1.5vh;
 
 .filter_container {
     height: 58%;
+}
+
+#filter {
     overflow:hidden;
     overflow-y:scroll;
+    height: 100%;
 }
 
 #filter_button_container {
