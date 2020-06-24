@@ -119,11 +119,16 @@ aside .title {
     cursor: pointer;
     text-align: center;
     color: white;
+    outline: none;
 }
+
+
 
 #search_button_at_top {
     background-color: #91CB3E;
 }
+
+
 
 #locate_button {
     background-color: lightgray;
@@ -135,26 +140,33 @@ padding-top: 1.5vh;
 
 
 #search_container {
-    background-color: #91CB3E;
+
     height: 12%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+#searchfield {
+    box-shadow: 5px 6px 15px darkgrey;
+
+}
+
 #distance_container {
     background-color: white;
     height: 12%;
     display: none;
+
 }
 
 #distance {
     font-size: 12px;
     text-align: center;
+    margin-top: 30px;
 }
 
 .filter_container {
-    height: 58%;
+    height: 62%;
 }
 
 #filter {
@@ -213,6 +225,7 @@ padding-top: 1.5vh;
     width: 100%;
     height: 20px;
     text-align: center;
+    line-height: 4em;
 }
 
 .slider {

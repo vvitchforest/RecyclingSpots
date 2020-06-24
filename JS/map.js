@@ -7,26 +7,75 @@ let locateButton = document.getElementById('locate_button');
 let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
 
-locateButton.addEventListener('click', function() {
-  showContainer(distanceContainer, searchContainer, false);
+locateButton.addEventListener('click', function(event) {
+  showContainer(distanceContainer, searchContainer, false, event.target,
+      searchButtonTop);
 });
 
-searchButtonTop.addEventListener('click', function() {
-  showContainer(searchContainer, distanceContainer, true);
+searchButtonTop.addEventListener('click', function(event) {
+  showContainer(searchContainer, distanceContainer, true, event.target,
+      locateButton);
 });
 
-function showContainer(containerShow, containerHide, flexDisplay) {
+
+$(function() {
+  $(`.main_buttons`).hover(function() {
+    if ($(this).css('background-color', 'lightgray')) {
+      $(this).css('background-color', '#9ecb8e');
+    }
+  });
+});
+
+$(function() {
+  $(`.main_buttons`).mouseleave(function() {
+    if ($(this).css('background-color', '#9ecb8e')) {
+      $(this).css('background-color', 'lightgray');
+    }
+  })
+});
+
+/*
+$(function() {
+  $(`.main_buttons`).hover(function() {
+    if ($(this).css('background-color', 'lightgray')) {
+      $(this).css('background-color', '#9ecb8e');
+    }
+  });
+});
+
+$(function() {
+  $(`.main_buttons`).mouseleave(function() {
+    if ($(this).css('background-color') === '#9ecb8e') {
+      $(this).css('background-color', 'lightgray');
+    }
+  });
+});*/
+
+/*, function() {
+      if ($(this).css("background-color") !== "#91CB3E") {
+            $(this).css("background-color", "#91CB3E" );
+      }
+
+    }*/
+
+function showContainer(
+    containerShow, containerHide, flexDisplay, showButton, hideButton) {
   if (flexDisplay === false) {
     if (containerShow.style.display === 'none' ||
         containerShow.style.display === '') {
       containerShow.style.display = 'block';
       containerHide.style.display = 'none';
+      showButton.style.backgroundColor = '#91CB3E';
+      hideButton.style.backgroundColor = 'lightgray';
+
     }
   } else {
     if (containerShow.style.display === 'none' ||
         containerShow.style.display === '') {
       containerShow.style.display = 'flex';
       containerHide.style.display = 'none';
+      showButton.style.backgroundColor = '#91CB3E';
+      hideButton.style.backgroundColor = 'lightgray';
     }
   }
 }
