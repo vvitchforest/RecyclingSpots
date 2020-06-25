@@ -7,79 +7,31 @@ let locateButton = document.getElementById('locate_button');
 let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
 
-locateButton.addEventListener('click', function(event) {
-  showContainer(distanceContainer, searchContainer, false, event.target,
-      searchButtonTop);
-});
-
-searchButtonTop.addEventListener('click', function(event) {
-  showContainer(searchContainer, distanceContainer, true, event.target,
-      locateButton);
-});
-
-
 $(function() {
-  $(`.main_buttons`).hover(function() {
-    if ($(this).css('background-color', 'lightgray')) {
-      $(this).css('background-color', '#9ecb8e');
+  $('.main_buttons').on(`hover`, function() {
+    $(this).toggleClass('main_buttons:hover');
+  });
+  $(locateButton).on(`click`, function() {
+    $(distanceContainer).show();
+    $(searchContainer).hide();
+    $(locateButton).addClass('main_buttonsClicked');
+    $(searchButtonTop).removeClass(`main_buttonsClicked`);
+    if (myLocation === null) {
+      navigator.geolocation.getCurrentPosition(userLocation, error);
+    } else {
+      userMarker.addTo(map).openPopup();
+    }
+  });
+  $(searchButtonTop).on(`click`, function() {
+    $(searchContainer).show();
+    $(distanceContainer).hide();
+    $(searchButtonTop).addClass('main_buttonsClicked');
+    $(locateButton).removeClass(`main_buttonsClicked`);
+    if (myLocation !== null) {
+      map.removeLayer(userMarker);
     }
   });
 });
-
-$(function() {
-  $(`.main_buttons`).mouseleave(function() {
-    if ($(this).css('background-color', '#9ecb8e')) {
-      $(this).css('background-color', 'lightgray');
-    }
-  })
-});
-
-/*
-$(function() {
-  $(`.main_buttons`).hover(function() {
-    if ($(this).css('background-color', 'lightgray')) {
-      $(this).css('background-color', '#9ecb8e');
-    }
-  });
-});
-
-$(function() {
-  $(`.main_buttons`).mouseleave(function() {
-    if ($(this).css('background-color') === '#9ecb8e') {
-      $(this).css('background-color', 'lightgray');
-    }
-  });
-});*/
-
-/*, function() {
-      if ($(this).css("background-color") !== "#91CB3E") {
-            $(this).css("background-color", "#91CB3E" );
-      }
-
-    }*/
-
-function showContainer(
-    containerShow, containerHide, flexDisplay, showButton, hideButton) {
-  if (flexDisplay === false) {
-    if (containerShow.style.display === 'none' ||
-        containerShow.style.display === '') {
-      containerShow.style.display = 'block';
-      containerHide.style.display = 'none';
-      showButton.style.backgroundColor = '#91CB3E';
-      hideButton.style.backgroundColor = 'lightgray';
-
-    }
-  } else {
-    if (containerShow.style.display === 'none' ||
-        containerShow.style.display === '') {
-      containerShow.style.display = 'flex';
-      containerHide.style.display = 'none';
-      showButton.style.backgroundColor = '#91CB3E';
-      hideButton.style.backgroundColor = 'lightgray';
-    }
-  }
-}
-
 //-----------------------------FILTERS-----------------------------------//
 /*Checkboxes*/
 const filterUl = document.getElementById('filter_ul');
@@ -111,12 +63,19 @@ fetch(
 //---------------------------SETTING UP THE MAP VIEW------------------------//
 
 let myLocation = null;
+let userMarker;
+const startingView = {
+  latitude: 60.3,
+  longitude: 25,
+};
 const map = L.map('mapview');
 const LayerGroup = L.featureGroup().addTo(map);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
+
+showMap(startingView);
 
 function showMap(crd) {
   map.setView([crd.latitude, crd.longitude], 10);
@@ -125,7 +84,8 @@ function showMap(crd) {
 function userLocation(pos) {
   myLocation = pos.coords;
   showMap(myLocation);
-  L.marker([myLocation.latitude, myLocation.longitude]).
+  userMarker = L.marker([myLocation.latitude, myLocation.longitude]);
+  userMarker.
       addTo(map).
       bindPopup('Olen tässä').
       openPopup();
@@ -134,8 +94,6 @@ function userLocation(pos) {
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
-
-navigator.geolocation.getCurrentPosition(userLocation, error);
 
 function addMarker(crd, text) {
   L.marker([crd.latitude, crd.longitude]).
