@@ -62,13 +62,14 @@ fetch(
 
 //---------------------------SETTING UP THE MAP VIEW------------------------//
 
+let markerCount = 0;
 let myLocation = null;
 let userMarker;
 const startingView = {
   latitude: 60.3,
   longitude: 25,
 };
-const map = L.map('mapview');
+let map = L.map('mapview');
 const LayerGroup = L.featureGroup().addTo(map);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -139,47 +140,49 @@ slider.oninput = function() {
 
 function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
-    alert('You have to check at least one box');
+    alert('Valitse ainakin yksi kierrätettävä materiaali');
   } else {
     LayerGroup.clearLayers();
-    fetch(apiSearchUrl,
-    ).
-        then(function(response) {
-          return response.json();
-        }).then(function(data) {
-      console.log(data);
-
-      for (let i = 0; i < data.results.length; i++) {
-
-        const coords = {
-          longitude: data.results[i].geometry.coordinates[0],
-          latitude: data.results[i].geometry.coordinates[1],
-        };
-
-        let recycleMaterial = [];
-        for (let j = 0; j < data.results[i].materials.length; j++) {
-          recycleMaterial += data.results[i].materials[j].name + '<br>';
-        }
-        //console.log(recycleMaterial);
-        let popupInfo = `<h5>${data.results[i].name}</h5>
+      fetch(apiSearchUrl,
+      ).
+          then(function(response) {
+            return response.json();
+          }).then(function(data) {
+        console.log(data);
+        for (let i = 0; i < data.results.length; i++) {
+          if (data.results[i].geometry === null) {
+            console.log(
+                data.results[i].name + ': koordinaatit eivät ole saatavilla');
+          } else {
+            const coords = {
+              longitude: data.results[i].geometry.coordinates[0],
+              latitude: data.results[i].geometry.coordinates[1],
+            };
+            let recycleMaterial = [];
+            for (let j = 0; j < data.results[i].materials.length; j++) {
+              recycleMaterial += data.results[i].materials[j].name + '<br>';
+            }
+            let popupInfo = `<h5>${data.results[i].name}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
                          ${recycleMaterial}</p>                                 
 `;
-
-        if (data.results[i].contact_info !== '') {
-          popupInfo += `<h5>Yhteystiedot: </h5>
+            if (data.results[i].contact_info !== '') {
+              popupInfo += `<h5>Yhteystiedot: </h5>
                       <p>${data.results[i].contact_info}</p>`;
+            }
+            addMarker(coords, popupInfo);
+            markerCount++;
+          }
         }
+        console.log(markerCount);
+      }).catch(function(error) {
+        console.log(error);
+      });
+    }
+    map.flyToBounds(LayerGroup.getBounds());
 
-        addMarker(coords, popupInfo);
-      }
-
-    }).catch(function(error) {
-      console.log(error);
-    });
-  }
 }
 
 function checkboxes(apiURL) {
