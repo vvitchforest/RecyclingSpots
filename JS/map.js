@@ -97,8 +97,7 @@ function error(err) {
 function addMarker(crd, text) {
   L.marker([crd.latitude, crd.longitude]).
       addTo(LayerGroup).
-      bindPopup(text).
-      openPopup();
+      bindPopup(text);
 }
 
 //--------------------------FETCHING DATA FROM API---------------------------//
@@ -109,6 +108,7 @@ const searchButton = document.getElementById('search_button');
 
 searchButton.addEventListener('click', function() {
   let searchByCity = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&municipality=${searchInput.value}`;
+  LayerGroup.clearLayers();
   search(checkboxes(searchByCity));
 
 });
@@ -125,7 +125,6 @@ searchInput.addEventListener('keyup', function(e) {
 let slider = document.getElementById('slider_id');
 let output = document.getElementById('value');
 let filterButton = document.getElementById('filter_button');
-let markerCount = 0;
 output.innerHTML = slider.value;
 slider.oninput = function() {
   output.innerHTML = this.value;
@@ -138,35 +137,23 @@ slider.oninput = function() {
 }); */
 
 function search(apiSearchUrl) {
-  markerCount = 0;
   if ($('#filter_ul :checkbox:checked').length === 0) {
     alert('Valitse ainakin yksi kierrätettävä materiaali');
   } else {
-    LayerGroup.clearLayers();
-    fetch(apiSearchUrl,
-    ).
-        then(function(response) {
-          return response.json();
-        }).then(function(data) {
-
+    fetch(apiSearchUrl).then(function(response) {
+      return response.json();
+    }).then(function(data) {
       console.log(data);
       handleData(data);
       if (data.next !== null && data.next !== ``) {
-        console.log(data.next);
-        return fetch(`https://cors-anywhere.herokuapp.com/${data.next}`);
+        search(`https://cors-anywhere.herokuapp.com/${data.next}`);
       }
-      console.log(markerCount);
-    }).then(function(response) {
-      return response.json();
-    }).then(function(dataNext) {
-      handleData(dataNext);
-      console.log(markerCount);
+      map.flyToBounds(LayerGroup.getBounds());
     }).
         catch(function(error) {
           console.log(error);
         });
   }
-  map.flyToBounds(LayerGroup.getBounds());
 }
 
 function checkboxes(apiURL) {
@@ -187,31 +174,35 @@ function checkboxes(apiURL) {
 function handleData(data) {
 
   for (let i = 0; i < data.results.length; i++) {
-    if (data.results[i].geometry === null || data.results[i].geometry === '' ||
-        data.results[i].geometry === undefined) {
-      console.log(
-          data.results[i].name + ': koordinaatit eivät ole saatavilla');
-    } else {
-      const coords = {
-        longitude: data.results[i].geometry.coordinates[0],
-        latitude: data.results[i].geometry.coordinates[1],
-      };
-      let recycleMaterial = [];
-      for (let j = 0; j < data.results[i].materials.length; j++) {
-        recycleMaterial += data.results[i].materials[j].name + '<br>';
-      }
-      let popupInfo = `<h5>${data.results[i].name}</h5>
+    if (data.results[i].municipality !== null ||
+        data.results[i].municipality !== `` || data.results[i].municipality !==
+        undefined) {
+      if (data.results[i].geometry === null || data.results[i].geometry ===
+          '' ||
+          data.results[i].geometry === undefined) {
+        console.log(
+            data.results[i].post_office + `: ` + data.results[i].name + ': koordinaatit eivät ole saatavilla');
+      } else {
+        const coords = {
+          longitude: data.results[i].geometry.coordinates[0],
+          latitude: data.results[i].geometry.coordinates[1],
+        };
+        let recycleMaterial = [];
+        for (let j = 0; j < data.results[i].materials.length; j++) {
+          recycleMaterial += data.results[i].materials[j].name + '<br>';
+        }
+        let popupInfo = `<h5>${data.results[i].name}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
                          ${recycleMaterial}</p>                                 
 `;
-      if (data.results[i].contact_info !== '') {
-        popupInfo += `<h5>Yhteystiedot: </h5>
+        if (data.results[i].contact_info !== '') {
+          popupInfo += `<h5>Yhteystiedot: </h5>
                       <p>${data.results[i].contact_info}</p>`;
+        }
+        addMarker(coords, popupInfo);
       }
-      addMarker(coords, popupInfo);
-      markerCount++;
     }
   }
 }
