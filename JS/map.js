@@ -17,7 +17,6 @@ searchButtonTop.addEventListener('click', function(event) {
       locateButton);
 });
 
-
 $(function() {
   $(`.main_buttons`).hover(function() {
     if ($(this).css('background-color', 'lightgray')) {
@@ -31,7 +30,7 @@ $(function() {
     if ($(this).css('background-color', '#9ecb8e')) {
       $(this).css('background-color', 'lightgray');
     }
-  })
+  });
 });
 
 /*
@@ -216,6 +215,7 @@ function search(apiSearchUrl) {
         }
 
         addMarker(coords, popupInfo);
+
       }
 
     }).catch(function(error) {
