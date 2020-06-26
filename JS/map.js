@@ -6,6 +6,8 @@ let searchButtonTop = document.getElementById('search_button_at_top');
 let locateButton = document.getElementById('locate_button');
 let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
+let filterButtonContainer = document.getElementById('filter_button_container');
+let filterButton = document.getElementById('filter_button');
 
 $(function() {
   $('.main_buttons').on(`hover`, function() {
@@ -14,17 +16,21 @@ $(function() {
   $(locateButton).on(`click`, function() {
     $(distanceContainer).show();
     $(searchContainer).hide();
+    $(filterButtonContainer).show();
     $(locateButton).addClass('main_buttonsClicked');
     $(searchButtonTop).removeClass(`main_buttonsClicked`);
+    LayerGroup.clearLayers();
     if (myLocation === null) {
       navigator.geolocation.getCurrentPosition(userLocation, error);
     } else {
       userMarker.addTo(map).openPopup();
+
     }
   });
   $(searchButtonTop).on(`click`, function() {
     $(searchContainer).show();
     $(distanceContainer).hide();
+    $(filterButtonContainer).hide();
     $(searchButtonTop).addClass('main_buttonsClicked');
     $(locateButton).removeClass(`main_buttonsClicked`);
     if (myLocation !== null) {
@@ -124,7 +130,6 @@ searchInput.addEventListener('keyup', function(e) {
 
 let slider = document.getElementById('slider_id');
 let output = document.getElementById('value');
-let filterButton = document.getElementById('filter_button');
 output.innerHTML = slider.value;
 slider.oninput = function() {
   output.innerHTML = this.value;
@@ -175,7 +180,7 @@ function handleData(data) {
 
   for (let i = 0; i < data.results.length; i++) {
     if (data.results[i].municipality !== null ||
-        data.results[i].municipality !== `` || data.results[i].municipality !==
+        data.results[i].municipality !== "" || data.results[i].municipality !==
         undefined) {
       if (data.results[i].geometry === null || data.results[i].geometry ===
           '' ||
