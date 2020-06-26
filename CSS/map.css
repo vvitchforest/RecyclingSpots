@@ -123,24 +123,19 @@ aside .title {
 }
 
 
-
-#search_button_at_top {
-    background-color: #91CB3E;
+.main_buttons:hover {
+    background-color: #9ecb8e;
 }
 
-
-
-#locate_button {
-    background-color: lightgray;
+.main_buttonsClicked {
+    background-color: #91CB3E !important;
 }
 
-#material_title{
-padding-top: 1.5vh;
+#material_title {
+    padding-top: 1.5vh;
 }
-
 
 #search_container {
-
     height: 12%;
     display: flex;
     justify-content: center;
@@ -149,7 +144,10 @@ padding-top: 1.5vh;
 
 #searchfield {
     box-shadow: 5px 6px 15px darkgrey;
+}
 
+#input {
+    outline: none;
 }
 
 #distance_container {
@@ -170,8 +168,8 @@ padding-top: 1.5vh;
 }
 
 #filter {
-    overflow:hidden;
-    overflow-y:scroll;
+    overflow: hidden;
+    overflow-y: scroll;
     height: 100%;
 }
 
@@ -264,6 +262,7 @@ padding-top: 1.5vh;
     font-weight: 700;
     padding-bottom: 1vh;
 }
+
 /* Customize the label (the container) */
 .container {
     display: block;

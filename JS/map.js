@@ -18,11 +18,10 @@ searchButtonTop.addEventListener('click', function(event) {
 });
 
 $(function() {
-  $(`.main_buttons`).hover(function() {
-    if ($(this).css('background-color', 'lightgray')) {
-      $(this).css('background-color', '#9ecb8e');
-    }
+  $('.main_buttons').on(`hover`, function() {
+    $(this).toggleClass('main_buttons:hover');
   });
+
 });
 
 $(function() {
@@ -38,47 +37,29 @@ $(function() {
   $(`.main_buttons`).hover(function() {
     if ($(this).css('background-color', 'lightgray')) {
       $(this).css('background-color', '#9ecb8e');
+
+  $(locateButton).on(`click`, function() {
+    $(distanceContainer).show();
+    $(searchContainer).hide();
+    $(locateButton).addClass('main_buttonsClicked');
+    $(searchButtonTop).removeClass(`main_buttonsClicked`);
+    if (myLocation === null) {
+      navigator.geolocation.getCurrentPosition(userLocation, error);
+    } else {
+      userMarker.addTo(map).openPopup();
+
+    }
+  });
+  $(searchButtonTop).on(`click`, function() {
+    $(searchContainer).show();
+    $(distanceContainer).hide();
+    $(searchButtonTop).addClass('main_buttonsClicked');
+    $(locateButton).removeClass(`main_buttonsClicked`);
+    if (myLocation !== null) {
+      map.removeLayer(userMarker);
     }
   });
 });
-
-$(function() {
-  $(`.main_buttons`).mouseleave(function() {
-    if ($(this).css('background-color') === '#9ecb8e') {
-      $(this).css('background-color', 'lightgray');
-    }
-  });
-});*/
-
-/*, function() {
-      if ($(this).css("background-color") !== "#91CB3E") {
-            $(this).css("background-color", "#91CB3E" );
-      }
-
-    }*/
-
-function showContainer(
-    containerShow, containerHide, flexDisplay, showButton, hideButton) {
-  if (flexDisplay === false) {
-    if (containerShow.style.display === 'none' ||
-        containerShow.style.display === '') {
-      containerShow.style.display = 'block';
-      containerHide.style.display = 'none';
-      showButton.style.backgroundColor = '#91CB3E';
-      hideButton.style.backgroundColor = 'lightgray';
-
-    }
-  } else {
-    if (containerShow.style.display === 'none' ||
-        containerShow.style.display === '') {
-      containerShow.style.display = 'flex';
-      containerHide.style.display = 'none';
-      showButton.style.backgroundColor = '#91CB3E';
-      hideButton.style.backgroundColor = 'lightgray';
-    }
-  }
-}
-
 //-----------------------------FILTERS-----------------------------------//
 /*Checkboxes*/
 const filterUl = document.getElementById('filter_ul');
@@ -109,13 +90,21 @@ fetch(
 
 //---------------------------SETTING UP THE MAP VIEW------------------------//
 
+let markerCount = 0;
 let myLocation = null;
-const map = L.map('mapview');
+let userMarker;
+const startingView = {
+  latitude: 60.3,
+  longitude: 25,
+};
+let map = L.map('mapview');
 const LayerGroup = L.featureGroup().addTo(map);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
+
+showMap(startingView);
 
 function showMap(crd) {
   map.setView([crd.latitude, crd.longitude], 10);
@@ -124,7 +113,8 @@ function showMap(crd) {
 function userLocation(pos) {
   myLocation = pos.coords;
   showMap(myLocation);
-  L.marker([myLocation.latitude, myLocation.longitude]).
+  userMarker = L.marker([myLocation.latitude, myLocation.longitude]);
+  userMarker.
       addTo(map).
       bindPopup('Olen tässä').
       openPopup();
@@ -133,8 +123,6 @@ function userLocation(pos) {
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
-
-navigator.geolocation.getCurrentPosition(userLocation, error);
 
 function addMarker(crd, text) {
   L.marker([crd.latitude, crd.longitude]).
@@ -180,7 +168,7 @@ slider.oninput = function() {
 
 function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
-    alert('You have to check at least one box');
+    alert('Valitse ainakin yksi kierrätettävä materiaali');
   } else {
     LayerGroup.clearLayers();
     fetch(apiSearchUrl,
@@ -189,53 +177,52 @@ function search(apiSearchUrl) {
           return response.json();
         }).then(function(data) {
       console.log(data);
-
       for (let i = 0; i < data.results.length; i++) {
-
-        const coords = {
-          longitude: data.results[i].geometry.coordinates[0],
-          latitude: data.results[i].geometry.coordinates[1],
-        };
-
-        let recycleMaterial = [];
-        for (let j = 0; j < data.results[i].materials.length; j++) {
-          recycleMaterial += data.results[i].materials[j].name + '<br>';
-        }
-        //console.log(recycleMaterial);
-        let popupInfo = `<h5>${data.results[i].name}</h5>
+        if (data.results[i].geometry === null) {
+          console.log(
+              data.results[i].name + ': koordinaatit eivät ole saatavilla');
+        } else {
+          const coords = {
+            longitude: data.results[i].geometry.coordinates[0],
+            latitude: data.results[i].geometry.coordinates[1],
+          };
+          let recycleMaterial = [];
+          for (let j = 0; j < data.results[i].materials.length; j++) {
+            recycleMaterial += data.results[i].materials[j].name + '<br>';
+          }
+          let popupInfo = `<h5>${data.results[i].name}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
                          ${recycleMaterial}</p>                                 
 `;
-
-        if (data.results[i].contact_info !== '') {
-          popupInfo += `<h5>Yhteystiedot: </h5>
+          if (data.results[i].contact_info !== '') {
+            popupInfo += `<h5>Yhteystiedot: </h5>
                       <p>${data.results[i].contact_info}</p>`;
+          }
+          addMarker(coords, popupInfo);
+          markerCount++;
         }
-
-        addMarker(coords, popupInfo);
-
       }
-
+      console.log(markerCount);
     }).catch(function(error) {
       console.log(error);
     });
   }
-}
 
-function checkboxes(apiURL) {
-  const checkboxes = document.getElementsByClassName(`checkboxes`);
-  for (let i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i].checked === true && apiURL.includes('&material=')) {
-      apiURL += `${checkboxes[i].value},`;
-    } else if (checkboxes[i].checked === true) {
-      apiURL += `&material=${checkboxes[i].value},`;
+  function checkboxes(apiURL) {
+    const checkboxes = document.getElementsByClassName(`checkboxes`);
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked === true && apiURL.includes('&material=')) {
+        apiURL += `${checkboxes[i].value},`;
+      } else if (checkboxes[i].checked === true) {
+        apiURL += `&material=${checkboxes[i].value},`;
+      }
     }
+    if (apiURL.endsWith(',')) {
+      apiURL = apiURL.substring(0, apiURL.length - 1);
+    }
+    console.log(apiURL);
+    return apiURL;
   }
-  if (apiURL.endsWith(',')) {
-    apiURL = apiURL.substring(0, apiURL.length - 1);
-  }
-  console.log(apiURL);
-  return apiURL;
 }
