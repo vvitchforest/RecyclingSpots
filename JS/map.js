@@ -185,6 +185,7 @@ function checkboxes(apiURL) {
 }
 
 function handleData(data) {
+
   for (let i = 0; i < data.results.length; i++) {
     if (data.results[i].geometry === null || data.results[i].geometry === '' ||
         data.results[i].geometry === undefined) {
