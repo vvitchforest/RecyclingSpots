@@ -75,23 +75,33 @@ const startingView = {
 };
 let map = L.map('mapview');
 const markers = L.markerClusterGroup({
-  iconCreateFunction: function (cluster) {
+  iconCreateFunction: function(cluster) {
     let childCount = cluster.getChildCount();
     let myCluster = 'custom_cluster_';
+    let height = 0;
+    let width = 0;
     if (childCount < 10) {
       myCluster += 'small';
+      height = 30;
+      width = 30;
     } else if (childCount < 100) {
       myCluster += 'medium';
+      height = 50;
+      width = 50;
+
     } else {
       myCluster += 'large';
+      height = 80;
+      width = 80;
     }
 
-    return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>',
-    className: myCluster, iconSize: new L.Point(32, 32)});
+    return new L.DivIcon({
+      html: '<span>' + childCount + '</span>',
+      className: myCluster,
+      iconSize: new L.Point(height, width),
+    });
 
-
-}
-
+  },
 });
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
