@@ -135,6 +135,7 @@ slider.oninput = function() {
 };
 
 filterButton.addEventListener('click', function() {
+  markers.clearLayers();
   let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
   1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
   search(checkboxes(searchByDistance));
@@ -178,11 +179,7 @@ function checkboxes(apiURL) {
 
 function handleData(data) {
   for (let i = 0; i < data.results.length; i++) {
-    if (data.results[i].geometry === null) {
-      console.log(
-          data.results[i].post_office + `: ` + data.results[i].name +
-          ': koordinaatit eivät ole saatavilla');
-    } else {
+    if (data.results[i].geometry !== null) {
       const coords = {
         longitude: data.results[i].geometry.coordinates[0],
         latitude: data.results[i].geometry.coordinates[1],
@@ -193,7 +190,6 @@ function handleData(data) {
         recycleMaterial += data.results[i].materials[j].name + '<br>';
       }
       let popupInfo = `<h5>${data.results[i].name}</h5>
-                    <h5>${data.results[i].spot_id}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
@@ -203,15 +199,24 @@ function handleData(data) {
         popupInfo += `<h5>Yhteystiedot: </h5>
                       <p>${data.results[i].contact_info}</p>`;
       }
-      if(i === 0){
-        addMarker(coords, popupInfo);
+      if (i === 0) {
+        if (data.results[i + 1].geometry !== null) {
+          const nextCoords = {
+            longitude: data.results[i + 1].geometry.coordinates[0],
+            latitude: data.results[i + 1].geometry.coordinates[1],
+          };
+          if (getDistance(coords, nextCoords) < 30000) {
+            addMarker(coords, popupInfo);
+          }
+        }
       } else {
-        if (data.results[i - 1].geometry !== null){
+        if (data.results[i - 1].geometry !== null) {
           const previousCoords = {
             longitude: data.results[i - 1].geometry.coordinates[0],
             latitude: data.results[i - 1].geometry.coordinates[1],
           };
-          if (getDistance(coords, previousCoords) < 30000){
+          if (getDistance(coords, previousCoords) < 30000 &&
+              getDistance(coords, previousCoords) !== 0) {
             addMarker(coords, popupInfo);
           }
         }
@@ -220,8 +225,8 @@ function handleData(data) {
   }
 }
 
+//Takes two geographical coordinate locations and calculates the distance between them. Returns meters
 function getDistance(coords, secondCoords) {
-  // return distance in meters
   let lon1 = toRadian(coords.longitude),
       lat1 = toRadian(coords.latitude),
       lon2 = toRadian(secondCoords.longitude),
@@ -238,6 +243,7 @@ function getDistance(coords, secondCoords) {
 
 }
 
+//Converts degrees to radians
 function toRadian(degree) {
   return degree * Math.PI / 180;
 }
