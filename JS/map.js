@@ -199,6 +199,7 @@ function handleData(data) {
           recycleMaterial += data.results[i].materials[j].name + '<br>';
         }
         let popupInfo = `<h5>${data.results[i].name}</h5>
+                    <h5>${data.results[i].spot_id}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
