@@ -19,7 +19,7 @@ $(function() {
     $(filterButtonContainer).show();
     $(locateButton).addClass('main_buttonsClicked');
     $(searchButtonTop).removeClass(`main_buttonsClicked`);
-    LayerGroup.clearLayers();
+    markers.clearLayers();
     if (myLocation === null) {
       navigator.geolocation.getCurrentPosition(userLocation, error);
     } else {
@@ -74,7 +74,7 @@ const startingView = {
   longitude: 25,
 };
 let map = L.map('mapview');
-const LayerGroup = L.featureGroup().addTo(map);
+const markers = L.markerClusterGroup();
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="httxps://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -100,9 +100,9 @@ function error(err) {
 }
 
 function addMarker(crd, text) {
-  L.marker([crd.latitude, crd.longitude]).
-      addTo(LayerGroup).
-      bindPopup(text);
+  let marker = L.marker([crd.latitude, crd.longitude]).bindPopup(text);
+  markers.addLayer(marker);
+
 }
 
 //--------------------------FETCHING DATA FROM API---------------------------//
@@ -113,7 +113,7 @@ const searchButton = document.getElementById('search_button');
 
 searchButton.addEventListener('click', function() {
   let searchByCity = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&municipality=${searchInput.value}`;
-  LayerGroup.clearLayers();
+  markers.clearLayers();
   search(checkboxes(searchByCity));
 
 });
@@ -134,11 +134,11 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 };
 
-/*filterButton.addEventListener('click', function() {
+filterButton.addEventListener('click', function() {
   let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
   1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
   search(checkboxes(searchByDistance));
-}); */
+});
 
 function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
@@ -152,12 +152,13 @@ function search(apiSearchUrl) {
       if (data.next !== null && data.next !== ``) {
         search(`https://cors-anywhere.herokuapp.com/${data.next}`);
       }
-      map.flyToBounds(LayerGroup.getBounds());
+      map.flyToBounds(markers.getBounds());
     }).
         catch(function(error) {
           console.log(error);
         });
   }
+  map.addLayer(markers);
 }
 
 function checkboxes(apiURL) {
