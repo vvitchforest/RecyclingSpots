@@ -101,7 +101,7 @@ aside .title {
     padding-bottom: 1vh;
 }
 
-.buttons_div{
+.buttons_div {
     height: 7vh;
     width: 100%;
     display: flex;
@@ -120,8 +120,8 @@ aside .title {
     text-align: center;
     color: white;
     outline: none;
+    background-color: lightgray;
 }
-
 
 .main_buttons:hover {
     background-color: #9ecb8e;
