@@ -116,6 +116,7 @@ aside .title {
     height: 100%;
     float: top;
     font-size: 16px;
+    letter-spacing: 1px;
     cursor: pointer;
     text-align: center;
     color: white;
@@ -176,24 +177,30 @@ aside .title {
 #filter_button_container {
     height: 12.5%;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
+    text-align: center;
+    line-height: 4em;
 }
 
 #filter_button {
-    height: 30px;
-    width: 200px;
+    height: 40px;
+    width: 100px;
     border-radius: 25px;
-    background-color: #91CB3E;
-    font-size: 1em;
+    background-color: #424A45;
+    font-size: 14px;
+    letter-spacing: 1px;
     color: white;
     font-weight: 400;
     border: #424A45;
     font-family: "Segoe UI", sans-serif;
     box-shadow: 5px 6px 15px darkgrey;
-    line-height: 1em;
+    line-height: 0;
     text-align: center;
+    outline: none;
+}
+
+#filter_button:hover {
+    background-color: #91CB3E;
 }
 
 #mapview {
