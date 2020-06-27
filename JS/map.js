@@ -24,7 +24,7 @@ $(function() {
       navigator.geolocation.getCurrentPosition(userLocation, error);
     } else {
       userMarker.addTo(map).openPopup();
-
+      showMap(myLocation, 12);
     }
   });
   $(searchButtonTop).on(`click`, function() {
@@ -77,18 +77,17 @@ let map = L.map('mapview');
 const LayerGroup = L.featureGroup().addTo(map);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  attribution: '&copy; <a href="httxps://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-showMap(startingView);
+showMap(startingView, 10);
 
-function showMap(crd) {
-  map.setView([crd.latitude, crd.longitude], 10);
+function showMap(crd, zoom) {
+  map.setView([crd.latitude, crd.longitude], zoom);
 }
 
 function userLocation(pos) {
   myLocation = pos.coords;
-  showMap(myLocation);
   userMarker = L.marker([myLocation.latitude, myLocation.longitude]);
   userMarker.
       addTo(map).
@@ -177,38 +176,67 @@ function checkboxes(apiURL) {
 }
 
 function handleData(data) {
-
   for (let i = 0; i < data.results.length; i++) {
-    if (data.results[i].municipality !== null ||
-        data.results[i].municipality !== "" || data.results[i].municipality !==
-        undefined) {
-      if (data.results[i].geometry === null || data.results[i].geometry ===
-          '' ||
-          data.results[i].geometry === undefined) {
-        console.log(
-            data.results[i].post_office + `: ` + data.results[i].name + ': koordinaatit eivät ole saatavilla');
-      } else {
-        const coords = {
-          longitude: data.results[i].geometry.coordinates[0],
-          latitude: data.results[i].geometry.coordinates[1],
-        };
-        let recycleMaterial = [];
-        for (let j = 0; j < data.results[i].materials.length; j++) {
-          recycleMaterial += data.results[i].materials[j].name + '<br>';
-        }
-        let popupInfo = `<h5>${data.results[i].name}</h5>
+    if (data.results[i].geometry === null) {
+      console.log(
+          data.results[i].post_office + `: ` + data.results[i].name +
+          ': koordinaatit eivät ole saatavilla');
+    } else {
+      const coords = {
+        longitude: data.results[i].geometry.coordinates[0],
+        latitude: data.results[i].geometry.coordinates[1],
+      };
+
+      let recycleMaterial = [];
+      for (let j = 0; j < data.results[i].materials.length; j++) {
+        recycleMaterial += data.results[i].materials[j].name + '<br>';
+      }
+      let popupInfo = `<h5>${data.results[i].name}</h5>
                     <h5>${data.results[i].spot_id}</h5>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
                          <h5>Kierrätettävät materiaalit: </h5>
                          ${recycleMaterial}</p>                                 
 `;
-        if (data.results[i].contact_info !== '') {
-          popupInfo += `<h5>Yhteystiedot: </h5>
+      if (data.results[i].contact_info !== '') {
+        popupInfo += `<h5>Yhteystiedot: </h5>
                       <p>${data.results[i].contact_info}</p>`;
-        }
+      }
+      if(i === 0){
         addMarker(coords, popupInfo);
+      } else {
+        if (data.results[i - 1].geometry !== null){
+          const previousCoords = {
+            longitude: data.results[i - 1].geometry.coordinates[0],
+            latitude: data.results[i - 1].geometry.coordinates[1],
+          };
+          if (getDistance(coords, previousCoords) < 30000){
+            addMarker(coords, popupInfo);
+          }
+        }
       }
     }
   }
+}
+
+function getDistance(coords, secondCoords) {
+  // return distance in meters
+  let lon1 = toRadian(coords.longitude),
+      lat1 = toRadian(coords.latitude),
+      lon2 = toRadian(secondCoords.longitude),
+      lat2 = toRadian(secondCoords.latitude);
+
+  let deltaLat = lat2 - lat1;
+  let deltaLon = lon2 - lon1;
+
+  let a = Math.pow(Math.sin(deltaLat / 2), 2) + Math.cos(lat1) *
+      Math.cos(lat2) * Math.pow(Math.sin(deltaLon / 2), 2);
+  let c = 2 * Math.asin(Math.sqrt(a));
+  let EARTH_RADIUS = 6371;
+  return c * EARTH_RADIUS * 1000;
+
+}
+
+function toRadian(degree) {
+  return degree * Math.PI / 180;
 }
