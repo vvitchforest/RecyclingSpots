@@ -74,7 +74,25 @@ const startingView = {
   longitude: 25,
 };
 let map = L.map('mapview');
-const markers = L.markerClusterGroup();
+const markers = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    let childCount = cluster.getChildCount();
+    let myCluster = 'custom_cluster_';
+    if (childCount < 10) {
+      myCluster += 'small';
+    } else if (childCount < 100) {
+      myCluster += 'medium';
+    } else {
+      myCluster += 'large';
+    }
+
+    return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>',
+    className: myCluster, iconSize: new L.Point(32, 32)});
+
+
+}
+
+});
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="httxps://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
