@@ -167,6 +167,7 @@ filterButton.addEventListener('click', function() {
   let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
   1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
   search(checkboxes(searchByDistance));
+
 });
 
 function search(apiSearchUrl) {
@@ -186,8 +187,8 @@ function search(apiSearchUrl) {
         catch(function(error) {
           console.log(error);
         });
+    map.addLayer(markers);
   }
-  map.addLayer(markers);
 }
 
 function checkboxes(apiURL) {
@@ -230,8 +231,8 @@ function handleData(data) {
       if (i === 0) {
         if (data.results[i + 1].geometry !== null) {
           const nextCoords = {
-            longitude: data.results[i + 2].geometry.coordinates[0],
-            latitude: data.results[i + 2].geometry.coordinates[1],
+            longitude: data.results[i + 1].geometry.coordinates[0],
+            latitude: data.results[i + 1].geometry.coordinates[1],
           };
           if (getDistance(coords, nextCoords) < 40000) {
             addMarker(coords, popupInfo);
