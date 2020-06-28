@@ -8,6 +8,7 @@ let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
 let filterButtonContainer = document.getElementById('filter_button_container');
 let filterButton = document.getElementById('filter_button');
+let defaultMapview = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=15000&point=24.9384, 60.1699`;
 
 $(function() {
   $('.main_buttons').on(`hover`, function() {
@@ -74,6 +75,13 @@ const startingView = {
   longitude: 25,
 };
 let map = L.map('mapview');
+
+const pinMarkerIcon = L.divIcon({
+  className: 'pin_marker',
+  html: '<i class="fas fa-recycle"></i>'
+});
+
+
 const markers = L.markerClusterGroup({
   iconCreateFunction: function(cluster) {
     let childCount = cluster.getChildCount();
@@ -127,11 +135,14 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-function addMarker(crd, text) {
-  let marker = L.marker([crd.latitude, crd.longitude]).bindPopup(text);
+function addMarker(crd, text, icon) {
+  let marker = L.marker([crd.latitude, crd.longitude], {icon: icon}).
+      bindPopup(text);
   markers.addLayer(marker);
 
 }
+
+search(checkboxes(defaultMapview));
 
 //--------------------------FETCHING DATA FROM API---------------------------//
 /*Search by city name*/
@@ -167,6 +178,7 @@ filterButton.addEventListener('click', function() {
   let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
   1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
   search(checkboxes(searchByDistance));
+
 });
 
 function search(apiSearchUrl) {
@@ -234,7 +246,7 @@ function handleData(data) {
             latitude: data.results[i + 2].geometry.coordinates[1],
           };
           if (getDistance(coords, nextCoords) < 40000) {
-            addMarker(coords, popupInfo);
+            addMarker(coords, popupInfo, pinMarkerIcon);
           }
         }
       } else {
@@ -245,7 +257,7 @@ function handleData(data) {
           };
           if (getDistance(coords, previousCoords) < 40000 &&
               getDistance(coords, previousCoords) !== 0) {
-            addMarker(coords, popupInfo);
+            addMarker(coords, popupInfo, pinMarkerIcon);
           }
         }
       }
