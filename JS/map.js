@@ -91,8 +91,8 @@ const markers = L.markerClusterGroup({
 
     } else {
       myCluster += 'large';
-      height = 80;
-      width = 80;
+      height = 70;
+      width = 70;
     }
 
     return new L.DivIcon({

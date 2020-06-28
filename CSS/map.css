@@ -340,34 +340,26 @@ aside .title {
 }
 
 .custom_cluster_large {
-    background-color: rgba(253, 156, 115, 0.6);
+    background-color: #cb2a15;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+    text-align: center;
     border-radius: 50%;
-
-}
-
-.custom_cluster_large div {
-    background-color: rgba(241, 128, 23, 0.6);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-;
+    line-height: 5em;
 
 }
 
 .custom_cluster_medium {
-    background-color: rgba(241, 211, 87, 0.6);
-    border-radius: 50%;
+    background-color: #cb9320;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+    font-family: "Segoe UI", sans-serif;
+    color: white;
     text-align: center;
-
-
-}
-
-.custom_cluster_medium div {
-    background-color: rgba(240, 194, 12, 0.6);
-    width: 30px;
-    height: 30px;
     border-radius: 50%;
-
+    line-height: 3.5em;
 
 }
 
