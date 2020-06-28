@@ -220,10 +220,10 @@ function handleData(data) {
       if (i === 0) {
         if (data.results[i + 1].geometry !== null) {
           const nextCoords = {
-            longitude: data.results[i + 1].geometry.coordinates[0],
-            latitude: data.results[i + 1].geometry.coordinates[1],
+            longitude: data.results[i + 2].geometry.coordinates[0],
+            latitude: data.results[i + 2].geometry.coordinates[1],
           };
-          if (getDistance(coords, nextCoords) < 30000) {
+          if (getDistance(coords, nextCoords) < 40000) {
             addMarker(coords, popupInfo);
           }
         }
@@ -233,7 +233,7 @@ function handleData(data) {
             longitude: data.results[i - 1].geometry.coordinates[0],
             latitude: data.results[i - 1].geometry.coordinates[1],
           };
-          if (getDistance(coords, previousCoords) < 30000 &&
+          if (getDistance(coords, previousCoords) < 40000 &&
               getDistance(coords, previousCoords) !== 0) {
             addMarker(coords, popupInfo);
           }
