@@ -4,92 +4,14 @@ body {
     font-weight: 400;
 }
 
-header .header_container {
-    width: 80%;
-    margin: 0 auto;
-    height: inherit;
-}
-
-header {
-    background: #424A45;
-    height: 10vh;
-}
-
-header::after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-.logo {
-    float: left;
-}
-
-nav {
-    margin-left: 120px;
-    height: inherit;
-}
-
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    height: inherit;
-}
-
-nav li {
-    display: inline-block;
-    margin-left: 100px;
-    position: relative;
-    height: inherit;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-}
-
-ul li a .icon {
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    margin: 0 auto;
-    padding: 8px 0;
-
-}
-
-ul li a .icon .fas {
-    color: #91CB3E;
-    font-size: 1.5em;
-}
-
-nav a:hover {
-    color: #91CB3E;
-}
-
-nav a::before {
-    content: '';
-    display: block;
-    height: 5px;
-    width: 0;
-    background-color: #91CB3E;
-    position: absolute;
-    top: 0;
-    transition: all ease-in-out 200ms;
-}
-
-nav a:hover::before {
-    width: 100%;
-}
-
 main {
     height: 85vh;
 }
 
 aside {
     float: left;
-    width: 20%;
-    height: 90vh;
+    width: 23%;
+    height: 100vh;
 }
 
 aside .title {
@@ -165,7 +87,7 @@ aside .title {
 }
 
 .filter_container {
-    height: 62%;
+    height: 64%;
 }
 
 #filter {
@@ -205,8 +127,8 @@ aside .title {
 
 #mapview {
     float: right;
-    width: 80%;
-    height: 90vh;
+    width: 77%;
+    height: 100vh;
 }
 
 
