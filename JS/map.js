@@ -78,9 +78,8 @@ let map = L.map('mapview');
 
 const pinMarkerIcon = L.divIcon({
   className: 'pin_marker',
-  html: '<i class="fas fa-recycle"></i>'
+  html: '<i class="fas fa-recycle"></i>',
 });
-
 
 const markers = L.markerClusterGroup({
   iconCreateFunction: function(cluster) {
@@ -178,13 +177,13 @@ filterButton.addEventListener('click', function() {
   let searchByDistance = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=${slider.value *
   1000}&point=${myLocation.longitude}, ${myLocation.latitude}`;
   search(checkboxes(searchByDistance));
-
 });
 
 function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
     alert('Valitse ainakin yksi kierrätettävä materiaali');
   } else {
+    $('#loader').show();
     fetch(apiSearchUrl).then(function(response) {
       return response.json();
     }).then(function(data) {
@@ -192,6 +191,8 @@ function search(apiSearchUrl) {
       handleData(data);
       if (data.next !== null && data.next !== ``) {
         search(`https://cors-anywhere.herokuapp.com/${data.next}`);
+      } else if (data.next === null) {
+        $('#loader').hide();
       }
       map.flyToBounds(markers.getBounds());
     }).

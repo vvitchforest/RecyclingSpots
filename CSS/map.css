@@ -129,13 +129,7 @@ aside .title {
     float: right;
     width: 77%;
     height: 100vh;
-}
-
-
-.icon_name {
-    font-size: 1.8vh;
-    margin-top: -5px;
-    text-align: center;
+    position: relative;
 }
 
 #searchfield {
@@ -320,8 +314,17 @@ aside .title {
     border-top: 17px solid #424A45;
 }
 
-.pin_marker i  {
-    color: white;
+.pin_marker i {
+    color: #91CB3E;
+}
+
+#loader {
+    background: url("https://upload.wikimedia.org/wikipedia/commons/b/b9/Youtube_loading_symbol_1_(wobbly).gif");
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    display: none;
+    z-index: 99999;
 }
 
 
