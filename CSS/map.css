@@ -129,7 +129,10 @@ aside .title {
     float: right;
     width: 77%;
     height: 100vh;
-    position: relative;
+    display: flex;
+    align-items: center;
+
+
 }
 
 #searchfield {
@@ -318,14 +321,48 @@ aside .title {
     color: #91CB3E;
 }
 
-#loader {
-    background: url("https://upload.wikimedia.org/wikipedia/commons/b/b9/Youtube_loading_symbol_1_(wobbly).gif");
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    display: none;
-    z-index: 99999;
+.loader {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    z-index: 999;
+    margin-left: 450px;
+
 }
+.loader div {
+    position: absolute;
+    border: 6px solid #000000;
+    opacity: 1;
+    border-radius: 50%;
+    animation: loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loader div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+@keyframes loader {
+    0% {
+        top: 72px;
+        left: 72px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 144px;
+        height: 144px;
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+
 
 
 
