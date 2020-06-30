@@ -77,6 +77,11 @@ const startingView = {
 };
 let map = L.map('mapview');
 
+const pinMarkerUser = L.divIcon({
+  className: 'user_marker',
+
+});
+
 const pinMarkerIcon = L.divIcon({
   className: 'pin_marker',
   html: '<i class="fas fa-recycle"></i>',
@@ -124,7 +129,7 @@ function showMap(crd, zoom) {
 
 function userLocation(pos) {
   myLocation = pos.coords;
-  userMarker = L.marker([myLocation.latitude, myLocation.longitude]);
+  userMarker = L.marker([myLocation.latitude, myLocation.longitude], {icon: pinMarkerUser});
   userMarker.
       addTo(map).
       bindPopup('Olen tässä').
@@ -231,18 +236,19 @@ function handleData(data) {
 
       let recycleMaterial = [];
       for (let j = 0; j < data.results[i].materials.length; j++) {
-        recycleMaterial += data.results[i].materials[j].name + '<br>';
+        recycleMaterial += '<li class="material_list_item" style="list-style: none"><i class="fas fa-recycle"></i>&nbsp &nbsp' + data.results[i].materials[j].name + '</li>';
       }
-      let popupInfo = `<h5>${data.results[i].name}</h5>
+      let popupInfo = `<div class="popup_info"><h3>${data.results[i].name}</h3>
                          <p>${data.results[i].address}<br>
                          ${data.results[i].postal_code}, ${data.results[i].post_office}
-                         <h5>Kierrätettävät materiaalit: </h5>
-                         ${recycleMaterial}</p>                                 
+                         <h4>Kierrätettävät materiaalit </h4>
+                        <ul class="material_list"> ${recycleMaterial}</ul></p>                            
 `;
+
       if (data.results[i].contact_info !== '') {
-        popupInfo += `<h5>Yhteystiedot: </h5>
+        popupInfo += `<h4>Yhteystiedot </h4>
                       <p>${data.results[i].contact_info}</p>`;
-      }
+      } else `</div>` ;
       if (i === 0) {
         if (data.results[i + 1].geometry !== null) {
           const nextCoords = {

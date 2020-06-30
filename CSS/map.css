@@ -294,6 +294,30 @@ aside .title {
 
 }
 
+.user_marker {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: 115px;
+    border-radius: 50%;
+    border: 7px solid #cb2a15;
+    width: 7px;
+    height: 7px;
+}
+
+.user_marker::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    bottom: -30px;
+    left: -4px;
+    border: 10px solid transparent;
+    border-top: 17px solid #cb2a15;
+}
+
+
+
 .pin_marker {
     position: absolute;
     top: 40%;
@@ -320,6 +344,7 @@ aside .title {
 .pin_marker i {
     color: #91CB3E;
 }
+
 
 .loader {
     display: inline-block;
@@ -356,6 +381,26 @@ aside .title {
         opacity: 0;
     }
 }
+
+
+/*---------------------------POPUP INFO-------------------------------------*/
+
+.popup_info {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    color: #424A45;
+}
+
+
+.material_list {
+    padding-left: 0;
+}
+
+.material_list_item i {
+    color: #91CB3E;
+}
+
+
 
 
 
