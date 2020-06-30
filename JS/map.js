@@ -54,15 +54,16 @@ fetch(
   <span class="checkmark"></span>
 </label>`;
   }
-
-  $('#check_all').on(`click`, function() {
+  const $checkAllBox = $(`#check_all`);
+  $($checkAllBox).on(`click`, function() {
     $('input:checkbox').not(this).prop('checked', false);
   });
-
   $(`.checkboxes`).on(`click`, function() {
-    $(`#check_all`).prop(`checked`, false);
+    $($checkAllBox).prop(`checked`, false);
+    if ($(`input:checkbox:checked`).length === 0) {
+      $(`#check_all`).prop(`checked`, true);
+    }
   });
-
 }).catch(function(error) {
   console.log(error);
 });
