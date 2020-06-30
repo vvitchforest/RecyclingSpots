@@ -222,6 +222,7 @@ function checkboxes(apiURL) {
 }
 
 function handleData(data) {
+  let nullCoordinates = [];
   for (let i = 0; i < data.results.length; i++) {
     if (data.results[i].geometry !== null) {
       const coords = {
@@ -249,7 +250,7 @@ function handleData(data) {
             longitude: data.results[i + 1].geometry.coordinates[0],
             latitude: data.results[i + 1].geometry.coordinates[1],
           };
-          if (getDistance(coords, nextCoords) < 40000) {
+          if (getDistance(coords, nextCoords) < 60000) {
             addMarker(coords, popupInfo, pinMarkerIcon);
           }
         }
@@ -259,14 +260,18 @@ function handleData(data) {
             longitude: data.results[i - 1].geometry.coordinates[0],
             latitude: data.results[i - 1].geometry.coordinates[1],
           };
-          if (getDistance(coords, previousCoords) < 40000 &&
+          if (getDistance(coords, previousCoords) < 60000 &&
               getDistance(coords, previousCoords) !== 0) {
             addMarker(coords, popupInfo, pinMarkerIcon);
           }
         }
       }
+    } else {
+
+      nullCoordinates.push(data.results[i]);
     }
   }
+  console.log(nullCoordinates.length);
 }
 
 //Takes two geographical coordinate locations and calculates the distance between them. Returns meters
