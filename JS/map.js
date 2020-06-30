@@ -190,7 +190,7 @@ function search(apiSearchUrl) {
     alert('Valitse ainakin yksi kierrätettävä materiaali');
   } else {
     $('.loader').show();
-    $('#mapview').fadeTo('slow', 0.6);
+    $('#mapview').fadeTo('fast', 0.6);
     fetch(apiSearchUrl).then(function(response) {
       return response.json();
     }).then(function(data) {
@@ -201,8 +201,8 @@ function search(apiSearchUrl) {
       } else if (data.next === null) {
         $('#mapview').fadeTo('slow', 1);
         $('.loader').hide();
+        map.flyToBounds(markers.getBounds());
       }
-      map.flyToBounds(markers.getBounds());
     }).
         catch(function(error) {
           console.log(error);

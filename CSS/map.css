@@ -38,7 +38,6 @@ aside .title {
     height: 100%;
     float: top;
     font-size: 16px;
-    letter-spacing: 1px;
     cursor: pointer;
     text-align: center;
     color: white;
@@ -47,15 +46,20 @@ aside .title {
 }
 
 .main_buttons:hover {
-    background-color: #9ecb8e;
+    background-color: gray;
 }
 
 .main_buttonsClicked {
     background-color: #91CB3E !important;
 }
 
+
+
 #material_title {
     padding-top: 1.5vh;
+    margin-left: 110px;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 #search_container {
@@ -66,11 +70,45 @@ aside .title {
 }
 
 #searchfield {
-    box-shadow: 5px 6px 15px darkgrey;
+    position: relative;
+    width: 75%;
+    height: 30px;
+    display: flex;
+
 }
 
 #input {
+    margin: 0;
+    padding: 0;
+    width: 100%;
     outline: none;
+    height: 40px;
+    border-radius: 25px;
+    border: 0.1em solid #424A45;
+    box-shadow: 3px 4px 15px darkgrey;
+
+}
+
+#search_button {
+    position: absolute;
+    border-radius: 5px;
+    right: 15px;
+    z-index: 2;
+    border: none;
+    top: 2px;
+    height: 40px;
+    cursor: pointer;
+    color: #424A45;
+    background-color: transparent;
+    outline: none;
+}
+
+#search_button i {
+    font-size: 20px;
+}
+
+#search_button i:hover {
+    color: #91CB3E;
 }
 
 #distance_container {
@@ -88,6 +126,8 @@ aside .title {
 
 .filter_container {
     height: 64%;
+    color: #424A45;
+
 }
 
 #filter {
@@ -131,18 +171,6 @@ aside .title {
     height: 100vh;
     display: flex;
     align-items: center;
-
-
-}
-
-#searchfield {
-    height: 30px;
-    width: 200px;
-    display: flex;
-}
-
-#search_button {
-    width: 50px;
 }
 
 .slider_container {
@@ -219,7 +247,7 @@ aside .title {
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: lightgray;
 
 }
 
