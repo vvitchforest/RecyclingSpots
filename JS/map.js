@@ -129,7 +129,8 @@ function showMap(crd, zoom) {
 
 function userLocation(pos) {
   myLocation = pos.coords;
-  userMarker = L.marker([myLocation.latitude, myLocation.longitude], {icon: pinMarkerUser});
+  userMarker = L.marker([myLocation.latitude, myLocation.longitude],
+      {icon: pinMarkerUser});
   userMarker.
       addTo(map).
       bindPopup('Olen tässä').
@@ -227,7 +228,6 @@ function checkboxes(apiURL) {
 }
 
 function handleData(data) {
-  let nullCoordinates = [];
   for (let i = 0; i < data.results.length; i++) {
     if (data.results[i].geometry !== null) {
       const coords = {
@@ -237,7 +237,8 @@ function handleData(data) {
 
       let recycleMaterial = [];
       for (let j = 0; j < data.results[i].materials.length; j++) {
-        recycleMaterial += '<li class="material_list_item" style="list-style: none"><i class="fas fa-recycle"></i>&nbsp &nbsp' + data.results[i].materials[j].name + '</li>';
+        recycleMaterial += '<li class="material_list_item" style="list-style: none"><i class="fas fa-recycle"></i>&nbsp &nbsp' +
+            data.results[i].materials[j].name + '</li>';
       }
       let popupInfo = `<div class="popup_info"><h3>${data.results[i].name}</h3>
                          <p>${data.results[i].address}<br>
@@ -248,8 +249,10 @@ function handleData(data) {
 
       if (data.results[i].contact_info !== '') {
         popupInfo += `<h4>Yhteystiedot </h4>
-                      <p>${data.results[i].contact_info}</p>`;
-      } else `</div>` ;
+                      <p>${data.results[i].contact_info}</p></div>`;
+      } else {
+        popupInfo += `</div>`;
+      }
       if (i === 0) {
         if (data.results[i + 1].geometry !== null) {
           const nextCoords = {
@@ -272,12 +275,8 @@ function handleData(data) {
           }
         }
       }
-    } else {
-
-      nullCoordinates.push(data.results[i]);
     }
   }
-  console.log(nullCoordinates.length);
 }
 
 //Takes two geographical coordinate locations and calculates the distance between them. Returns meters
