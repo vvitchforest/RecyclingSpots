@@ -183,7 +183,9 @@ function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
     alert('Valitse ainakin yksi kierrätettävä materiaali');
   } else {
-    $('#loader').show();
+    $('.loader').show();
+    //$('#mapview')style.opacity
+    document.getElementById('mapview').style.opacity ='0.6';
     fetch(apiSearchUrl).then(function(response) {
       return response.json();
     }).then(function(data) {
@@ -192,7 +194,8 @@ function search(apiSearchUrl) {
       if (data.next !== null && data.next !== ``) {
         search(`https://cors-anywhere.herokuapp.com/${data.next}`);
       } else if (data.next === null) {
-        $('#loader').hide();
+        document.getElementById('mapview').style.opacity ='1';
+        $('.loader').hide();
       }
       map.flyToBounds(markers.getBounds());
     }).
