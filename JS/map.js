@@ -129,11 +129,11 @@ function showMap(crd, zoom) {
 
 function userLocation(pos) {
   myLocation = pos.coords;
+
   userMarker = L.marker([myLocation.latitude, myLocation.longitude], {icon: pinMarkerUser});
   userMarker.
       addTo(map).
-      bindPopup('Olen tässä').
-      openPopup();
+      bindPopup('Olen tässä');
 }
 
 function error(err) {

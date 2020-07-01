@@ -324,7 +324,7 @@ aside {
     left: 50%;
     margin-left: 115px;
     border-radius: 50%;
-    border: 7px solid #cb2a15;
+    border: 7px solid #3c69cb;
     width: 7px;
     height: 7px;
 }
@@ -337,7 +337,7 @@ aside {
     bottom: -30px;
     left: -4px;
     border: 10px solid transparent;
-    border-top: 17px solid #cb2a15;
+    border-top: 17px solid #3c69cb;
 }
 
 .pin_marker {
