@@ -5,7 +5,8 @@ body {
 }
 
 main {
-    height: 85vh;
+    height: 100vh;
+
 }
 
 aside {
@@ -158,9 +159,9 @@ aside {
 }
 
 #material_title {
+    text-align: center;
     height: 10px;
     margin-top: 0;
-    margin-left: 110px;
     padding-top: 1.5vh;
     padding-bottom: 1vh;
     font-size: 18px;
@@ -182,9 +183,9 @@ aside {
 #filter_button_container {
     height: 12.5%;
     width: 100%;
-    display: none;
-    text-align: center;
-    line-height: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #filter_button {
@@ -201,6 +202,7 @@ aside {
     border-radius: 25px;
     box-shadow: 5px 6px 15px darkgrey;
     outline: none;
+    display: none;
 }
 
 #filter_button:hover {
@@ -382,6 +384,7 @@ aside {
     margin-left: 450px;
 
 }
+
 .loader div {
     position: absolute;
     border: 6px solid #000000;
@@ -389,9 +392,11 @@ aside {
     border-radius: 50%;
     animation: loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
+
 .loader div:nth-child(2) {
     animation-delay: -0.5s;
 }
+
 @keyframes loader {
     0% {
         top: 72px;
@@ -425,14 +430,55 @@ aside {
     color: #91CB3E;
 }
 
+@media screen and (max-width: 1023px)  {
+    #mapview {
+        width: 100%;
+        height: 80%;
+    }
 
+    aside {
+        width: 100%;
+    }
 
+    .loader {
+        margin-left: 40%;
+    }
 
+    .filter_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+    }
 
+    #filter {
+        width: 60%;
+    }
+}
 
+@media screen and (min-width: 1024px) and (max-width: 1400px){
+    aside{
+        width: 30%;
+    }
+    #mapview{
+        width: 70%;
+    }
+}
 
-
-
-
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    #searchfield {
+     width: 35%;
+    }
+    .container {
+        font-size: 20px;
+    }
+    #material_title {
+        font-size: 26px;
+    }
+    .slider {
+        width: 50%;
+    }
+}
 
 

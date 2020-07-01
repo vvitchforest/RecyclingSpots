@@ -6,7 +6,6 @@ let searchButtonTop = document.getElementById('search_button_at_top');
 let locateButton = document.getElementById('locate_button');
 let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
-let filterButtonContainer = document.getElementById('filter_button_container');
 let filterButton = document.getElementById('filter_button');
 let defaultMapview = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=15000&point=24.9384, 60.1699`;
 
@@ -17,7 +16,7 @@ $(function() {
   $(locateButton).on(`click`, function() {
     $(distanceContainer).show();
     $(searchContainer).hide();
-    $(filterButtonContainer).show();
+    $(filterButton).show();
     $(locateButton).addClass('main_buttonsClicked');
     $(searchButtonTop).removeClass(`main_buttonsClicked`);
     markers.clearLayers();
@@ -31,7 +30,7 @@ $(function() {
   $(searchButtonTop).on(`click`, function() {
     $(searchContainer).show();
     $(distanceContainer).hide();
-    $(filterButtonContainer).hide();
+    $(filterButton).hide();
     $(searchButtonTop).addClass('main_buttonsClicked');
     $(locateButton).removeClass(`main_buttonsClicked`);
     if (myLocation !== null) {
