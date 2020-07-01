@@ -340,6 +340,12 @@ aside {
     border-top: 17px solid #3c69cb;
 }
 
+#userPopUp {
+    font-size: 14px;
+    font-family: "Segoe UI", sans-serif;
+    color: #424A45;
+}
+
 .pin_marker {
     position: absolute;
     top: 40%;

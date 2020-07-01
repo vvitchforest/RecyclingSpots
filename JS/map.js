@@ -130,10 +130,20 @@ function showMap(crd, zoom) {
 function userLocation(pos) {
   myLocation = pos.coords;
 
+
   userMarker = L.marker([myLocation.latitude, myLocation.longitude], {icon: pinMarkerUser});
   userMarker.
       addTo(map).
       bindPopup('Olen tässä');
+
+  userMarker = L.marker([myLocation.latitude, myLocation.longitude],
+      {icon: pinMarkerUser});
+  let userText = `<div id="userPopUp">Olen tässä</div>`
+  userMarker.
+      addTo(map).
+      bindPopup(userText).
+      openPopup();
+
 }
 
 function error(err) {
@@ -236,7 +246,8 @@ function handleData(data) {
 
       let recycleMaterial = [];
       for (let j = 0; j < data.results[i].materials.length; j++) {
-        recycleMaterial += '<li class="material_list_item" style="list-style: none"><i class="fas fa-recycle"></i>&nbsp &nbsp' + data.results[i].materials[j].name + '</li>';
+        recycleMaterial += '<li class="material_list_item" style="list-style: none"><i class="fas fa-recycle"></i>&nbsp &nbsp' +
+            data.results[i].materials[j].name + '</li>';
       }
       let popupInfo = `<div class="popup_info"><h3>${data.results[i].name}</h3>
                          <p>${data.results[i].address}<br>
@@ -247,15 +258,17 @@ function handleData(data) {
 
       if (data.results[i].contact_info !== '') {
         popupInfo += `<h4>Yhteystiedot </h4>
-                      <p>${data.results[i].contact_info}</p>`;
-      } else `</div>` ;
+                      <p>${data.results[i].contact_info}</p></div>`;
+      } else {
+        popupInfo += `</div>`;
+      }
       if (i === 0) {
         if (data.results[i + 1].geometry !== null) {
           const nextCoords = {
             longitude: data.results[i + 1].geometry.coordinates[0],
             latitude: data.results[i + 1].geometry.coordinates[1],
           };
-          if (getDistance(coords, nextCoords) < 40000) {
+          if (getDistance(coords, nextCoords) < 60000) {
             addMarker(coords, popupInfo, pinMarkerIcon);
           }
         }
@@ -265,7 +278,7 @@ function handleData(data) {
             longitude: data.results[i - 1].geometry.coordinates[0],
             latitude: data.results[i - 1].geometry.coordinates[1],
           };
-          if (getDistance(coords, previousCoords) < 40000 &&
+          if (getDistance(coords, previousCoords) < 60000 &&
               getDistance(coords, previousCoords) !== 0) {
             addMarker(coords, popupInfo, pinMarkerIcon);
           }
