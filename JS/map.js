@@ -9,12 +9,13 @@ let searchContainer = document.getElementById('search_container');
 let filterButton = document.getElementById('filter_button');
 let defaultMapview = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=15000&point=24.9384, 60.1699`;
 
+
 $(function() {
   $('.main_buttons').on(`hover`, function() {
     $(this).toggleClass('main_buttons:hover');
   });
   $(locateButton).on(`click`, function() {
-    $(distanceContainer).show();
+    $(distanceContainer).css("display", "flex");
     $(searchContainer).hide();
     $(filterButton).show();
     $(locateButton).addClass('main_buttonsClicked');
@@ -128,21 +129,12 @@ function showMap(crd, zoom) {
 
 function userLocation(pos) {
   myLocation = pos.coords;
-
-
-  userMarker = L.marker([myLocation.latitude, myLocation.longitude], {icon: pinMarkerUser});
-  userMarker.
-      addTo(map).
-      bindPopup('Olen tässä');
-
   userMarker = L.marker([myLocation.latitude, myLocation.longitude],
       {icon: pinMarkerUser});
   let userText = `<div id="userPopUp">Olen tässä</div>`
   userMarker.
       addTo(map).
-      bindPopup(userText).
-      openPopup();
-
+      bindPopup(userText);
 }
 
 function error(err) {
