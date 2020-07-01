@@ -131,9 +131,10 @@ function userLocation(pos) {
   myLocation = pos.coords;
   userMarker = L.marker([myLocation.latitude, myLocation.longitude],
       {icon: pinMarkerUser});
+  let userText = `<div id="userPopUp">Olen tässä</div>`
   userMarker.
       addTo(map).
-      bindPopup('Olen tässä').
+      bindPopup(userText).
       openPopup();
 }
 

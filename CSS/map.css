@@ -344,7 +344,11 @@ aside .title {
     border-top: 17px solid #cb2a15;
 }
 
-
+#userPopUp {
+    font-size: 14px;
+    font-family: "Segoe UI", sans-serif;
+    color: #424A45;
+}
 
 .pin_marker {
     position: absolute;
