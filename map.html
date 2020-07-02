@@ -20,17 +20,23 @@
 <body>
 
 <main>
-    <div id="mapview">
-        <div class="loader"><div></div><div></div></div>
+    <div id="mapContainer">
+        <div id="mapview">
+            <div class="loader">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     </div>
-    <aside class="aside">
+    <aside id="aside_id" class="aside">
         <div class="buttons_div">
             <button class="main_buttons main_buttonsClicked" id="search_button_at_top">Hae</button>
             <button class="main_buttons" id="locate_button">Paikanna</button>
         </div>
         <div id="search_container">
             <div id="searchfield">
-                <input id="input" placeholder="Hae kaupunkia" style="text-align: center; font-family: 'Segoe UI', sans-serif; font-size: 14px">
+                <input id="input" placeholder="Hae kaupunkia"
+                       style="text-align: center; font-family: 'Segoe UI', sans-serif; font-size: 14px">
                 <button id="search_button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -57,6 +63,7 @@
             </div>
         </div>
     </aside>
+    <button class="showFiltersMobile" id="mobileButton">S</button>
 </main>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="

@@ -7,7 +7,9 @@ let locateButton = document.getElementById('locate_button');
 let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
 let filterButton = document.getElementById('filter_button');
+let mobileButton = document.getElementById('mobileButton');
 let defaultMapview = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=15000&point=24.9384, 60.1699`;
+
 
 
 $(function() {
@@ -36,6 +38,13 @@ $(function() {
     $(locateButton).removeClass(`main_buttonsClicked`);
     if (myLocation !== null) {
       map.removeLayer(userMarker);
+    }
+  });
+  $(mobileButton).on(`click`, function() {
+    if($(`#aside_id`).css('display') === 'block'){
+      $(`.aside`).hide();
+    } else {
+      $(`.aside`).show();
     }
   });
 });
