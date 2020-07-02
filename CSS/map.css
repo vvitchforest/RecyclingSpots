@@ -438,6 +438,14 @@ aside {
     display: none;
 }
 
+#arrow_icons_down {
+    display: none;
+}
+
+#arrow_icons_up {
+
+}
+
 @media screen and (max-width: 768px) {
     #mapview {
         width: 100vw;
@@ -456,14 +464,20 @@ aside {
 
     .showFiltersMobile {
         display: block;
-        background-color: magenta;
+        background-color: #424A45;
+        color: white;
+        font-size: 36px;
         position: absolute;
         right: 50px;
         bottom: 40px;
         z-index: 999;
-        height: 50px;
-        width: 75px;
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        border: solid #424A45;
+        box-shadow: 5px 5px 10px darkgrey;
     }
+
 
     .loader {
         margin-left: 40%;

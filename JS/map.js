@@ -43,8 +43,13 @@ $(function() {
   $(mobileButton).on(`click`, function() {
     if($(`#aside_id`).css('display') === 'block'){
       $(`.aside`).hide();
+      $(`#arrow_icons_up`).show();
+      $(`#arrow_icons_down`).hide();
     } else {
       $(`.aside`).show();
+      $(`#arrow_icons_up`).hide();
+      $(`#arrow_icons_down`).show();
+
     }
   });
 });
