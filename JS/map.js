@@ -4,12 +4,14 @@
 
 let searchButtonTop = document.getElementById('search_button_at_top');
 let locateButton = document.getElementById('locate_button');
+let infoButton = document.getElementById('info_button');
 let distanceContainer = document.getElementById('distance_container');
 let searchContainer = document.getElementById('search_container');
+let filterContainer = document.getElementById('filter_container');
+let infoContainer = document.getElementById('info_container');
 let filterButton = document.getElementById('filter_button');
 let mobileButton = document.getElementById('mobileButton');
 let defaultMapview = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=15000&point=24.9384, 60.1699`;
-
 
 
 $(function() {
@@ -19,9 +21,12 @@ $(function() {
   $(locateButton).on(`click`, function() {
     $(distanceContainer).css("display", "flex");
     $(searchContainer).hide();
+    $(infoContainer).hide();
+    $(filterContainer).show();
     $(filterButton).show();
     $(locateButton).addClass('main_buttonsClicked');
     $(searchButtonTop).removeClass(`main_buttonsClicked`);
+    $(infoButton).removeClass(`main_buttonsClicked`);
     markers.clearLayers();
     if (myLocation === null) {
       navigator.geolocation.getCurrentPosition(userLocation, error);
@@ -32,14 +37,31 @@ $(function() {
   });
   $(searchButtonTop).on(`click`, function() {
     $(searchContainer).show();
+    $(filterContainer).show();
     $(distanceContainer).hide();
+    $(infoContainer).hide();
     $(filterButton).hide();
     $(searchButtonTop).addClass('main_buttonsClicked');
     $(locateButton).removeClass(`main_buttonsClicked`);
+    $(infoButton).removeClass(`main_buttonsClicked`);
+
     if (myLocation !== null) {
       map.removeLayer(userMarker);
     }
   });
+
+  $(infoButton).on('click', function() {
+    $(infoContainer).css("display", "flex");
+    $(searchContainer).hide();
+    $(distanceContainer).hide();
+    $(filterButton).hide();
+    $(filterContainer).hide();
+    $(infoContainer).show();
+    $(infoButton).addClass('main_buttonsClicked');
+    $(locateButton).removeClass(`main_buttonsClicked`);
+    $(searchButtonTop).removeClass(`main_buttonsClicked`);
+  });
+
   $(mobileButton).on(`click`, function() {
     if($(`#aside_id`).css('display') === 'block'){
       $(`.aside`).hide();
@@ -49,10 +71,10 @@ $(function() {
       $(`.aside`).show();
       $(`#arrow_icons_up`).hide();
       $(`#arrow_icons_down`).show();
-
     }
   });
 });
+
 //-----------------------------FILTERS-----------------------------------//
 /*Checkboxes*/
 const filterUl = document.getElementById('filter_ul');

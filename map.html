@@ -30,8 +30,24 @@
     </div>
     <aside id="aside_id" class="aside">
         <div class="buttons_div">
-            <button class="main_buttons main_buttonsClicked" id="search_button_at_top">Hae</button>
-            <button class="main_buttons" id="locate_button">Paikanna</button>
+            <button class="main_buttons main_buttonsClicked" id="search_button_at_top">
+                <div class="icon_container">
+                <i class="fas fa-search-location"></i>
+                </div>
+                <p>HAE</p>
+            </button>
+            <button class="main_buttons" id="locate_button">
+                <div class="icon_container">
+                    <i class="fas fa-location-arrow"></i>
+                </div>
+                <p>PAIKANNA</p>
+            </button>
+            <button class="main_buttons" id="info_button">
+                <div class="icon_container">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <p>INFO</p>
+            </button>
         </div>
         <div id="search_container">
             <div id="searchfield">
@@ -48,7 +64,19 @@
             </div>
             <p id="distance"><span id="value"></span> km</p>
         </div>
-        <div class="filter_container">
+
+        <div id="info_container">
+            <section class="info_text">
+                <h3>Sovelluksesta</h3>
+                <p>KierrätysPaikka on Suomen kierrätyspisteiden etsimiseen tarkoitettu web-sovellus.
+                Sovelluksen avulla löydät lähelläsi olevat kierrätyspisteet, joissa voit kierrättää haluamiasi materiaaleja.
+                Voit etsiä kierrätyspisteitä joko kaupungin nimellä, tai hakemalla kierrätyspisteitä lähellä omaa sijaintiasi. </p>
+                <br>
+                <h3>API</h3>
+                <p></p>
+            </section>
+        </div>
+        <div class="filter_container" id="filter_container">
             <p id="material_title">Valitse materiaalit</p>
             <div id="filter">
                 <ul id="filter_ul">
@@ -62,6 +90,7 @@
                 <button id="filter_button">Hae</button>
             </div>
         </div>
+
     </aside>
     <button class="showFiltersMobile" id="mobileButton">
         <i id="arrow_icons_up" class="fas fa-angle-double-up" ></i>
