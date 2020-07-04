@@ -32,6 +32,7 @@ aside {
     width: 100%;
     display: flex;
     justify-content: center;
+
 }
 
 .main_buttons {
@@ -41,11 +42,12 @@ aside {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    border: 1px solid #424A45;
+    border: none;
     outline: none;
     color: white;
     background-color: #424A45;
     cursor: pointer;
+
 
 }
 
@@ -63,13 +65,14 @@ aside {
 }
 
 .main_buttons div {
-    height: 40px;
-    width: 40px;
+    height: 32px;
+    width: 32px;
     border: 1px solid white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .main_buttons div:hover {
@@ -77,7 +80,7 @@ aside {
 }
 
 .main_buttons i {
-    font-size: 18px;
+    font-size: 15px;
     color: white;
 
 }
@@ -87,6 +90,7 @@ aside {
     font-size: 11px;
     margin-bottom: 0.3em;
     letter-spacing: 0.05em;
+    padding-bottom: 5px;
 
 }
 
@@ -98,12 +102,14 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 #searchfield {
     position: relative;
     width: 75%;
     height: 30px;
+
 }
 
 #input {
@@ -209,8 +215,21 @@ aside {
 .info_text {
     width: 90%;
     font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
+    font-size: 18px;
     color: #424A45;
+    padding-left: 2em;
+    padding-right: 2em;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.info_text a {
+    font-weight: 600;
+    color: darkgreen;
+}
+
+.info_text a:hover {
+    color: #91CB3E;
 }
 
 /*----------------------------------------------FILTER CONTAINER------------------------------------------------------*/
@@ -248,11 +267,12 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 #filter_button {
     height: 40px;
-    width: 100px;
+    width: 95px;
     text-align: center;
     line-height: 0;
     font-size: 14px;
@@ -506,7 +526,7 @@ aside {
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1080px) {
     #mapview {
         width: 100vw;
         height: 100vh;
@@ -515,9 +535,9 @@ aside {
     aside {
         display: none;
         width: 100vw;
-        height: 70vh;
-        z-index: 999;
-        top: 30vh;
+        height: 80vh;
+        z-index: 9999;
+        top: 20vh;
         position: fixed;
         background-color: white;
     }
@@ -526,13 +546,13 @@ aside {
         display: block;
         background-color: #424A45;
         color: white;
-        font-size: 36px;
+        font-size: 18px;
         position: absolute;
-        right: 50px;
-        bottom: 40px;
-        z-index: 999;
-        height: 80px;
-        width: 80px;
+        right: 4vw;
+        bottom: 4vh;
+        z-index: 99999;
+        height: 44px;
+        width: 44px;
         border-radius: 50%;
         border: solid #424A45;
         box-shadow: 5px 5px 10px darkgrey;
@@ -556,55 +576,47 @@ aside {
         width: 60%;
         height: 63%;
     }
-}
-
-
-@media screen and (min-width: 1024px) and (max-width: 1400px) {
-    aside {
-        width: 30%;
-    }
-
-    #mapview {
-        width: 70%;
-    }
-
-    .container {
-        font-size: 20px;
-    }
-
-    #material_title {
-        font-size: 26px;
-        padding-bottom: 20px;
-    }
-
-    #distance_container {
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    #searchfield {
-        width: 35%;
-    }
-
-    .container {
-        font-size: 20px;
-    }
-
-    #material_title {
-        font-size: 26px;
-        padding-bottom: 20px;
-    }
 
     .slider {
         width: 50%;
     }
 
-    .slider_container {
-        padding-top: 30px;
+
+    #searchfield {
+        max-width: 50%;
+        margin-top: 15px;
     }
 
+.buttons_div {
+    height: 9vh;
+
 }
+
+    .main_buttons div {
+        height: 26px;
+        width: 26px;
+    }
+
+    .main_buttons p {
+        font-size: 9px;
+        padding-bottom: 0px;
+    }
+
+    .main_buttons i {
+        font-size: 11px;
+    }
+    #filter_button {
+        height: 35px;
+        width: 80px;
+        position: absolute;
+        bottom: 4vh;
+        font-size: 12px;
+    }
+
+
+}
+
+
+
 
 
