@@ -32,7 +32,6 @@ aside {
     width: 100%;
     display: flex;
     justify-content: center;
-
 }
 
 .main_buttons {
@@ -47,8 +46,6 @@ aside {
     color: white;
     background-color: #424A45;
     cursor: pointer;
-
-
 }
 
 /*.main_buttons:hover {
@@ -72,7 +69,6 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .main_buttons div:hover {
@@ -82,7 +78,6 @@ aside {
 .main_buttons i {
     font-size: 15px;
     color: white;
-
 }
 
 .main_buttons p {
@@ -91,9 +86,7 @@ aside {
     margin-bottom: 0.3em;
     letter-spacing: 0.05em;
     padding-bottom: 5px;
-
 }
-
 
 /*-------------------------------------------SEARCH CONTAINER---------------------------------------------------------*/
 
@@ -102,14 +95,12 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 #searchfield {
     position: relative;
     width: 75%;
     height: 30px;
-
 }
 
 #input {
@@ -174,7 +165,6 @@ aside {
     -webkit-appearance: none;
     -webkit-transition: 200ms;
     transition: opacity 200ms;
-
 }
 
 .slider:hover {
@@ -207,7 +197,8 @@ aside {
     display: none;
     justify-content: center;
 }
-#info_container p  {
+
+#info_container p {
     padding-top: 5px;
     line-height: 1.5em;
 }
@@ -267,7 +258,6 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 #filter_button {
@@ -288,7 +278,7 @@ aside {
 }
 
 #filter_button:hover {
-    background-color: gray;
+    background-color: #91CB3E;
 }
 
 /*------------------------------------------CUSTOM CHECKBOXES---------------------------------------------------------*/
@@ -329,32 +319,26 @@ aside {
     height: 25px;
     width: 25px;
     background-color: lightgray;
-
 }
 
-/* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
     background-color: gray;
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
     background-color: #424A45;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-/* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
     display: block;
 }
 
-/* Style the checkmark/indicator */
 .container .checkmark:after {
     left: 9px;
     top: 5px;
@@ -464,7 +448,6 @@ aside {
     height: 80px;
     z-index: 999;
     margin-left: 450px;
-
 }
 
 .loader div {
@@ -522,10 +505,6 @@ aside {
     display: none;
 }
 
-#arrow_icons_up {
-
-}
-
 @media screen and (max-width: 1080px) {
     #mapview {
         width: 100vw;
@@ -559,7 +538,6 @@ aside {
         outline: none;
     }
 
-
     .loader {
         margin-left: 40%;
     }
@@ -581,16 +559,14 @@ aside {
         width: 50%;
     }
 
-
     #searchfield {
         max-width: 50%;
         margin-top: 15px;
     }
 
-.buttons_div {
-    height: 9vh;
-
-}
+    .buttons_div {
+        height: 9vh;
+    }
 
     .main_buttons div {
         height: 26px;
@@ -605,6 +581,7 @@ aside {
     .main_buttons i {
         font-size: 11px;
     }
+
     #filter_button {
         height: 35px;
         width: 80px;
@@ -612,11 +589,4 @@ aside {
         bottom: 4vh;
         font-size: 12px;
     }
-
-
 }
-
-
-
-
-

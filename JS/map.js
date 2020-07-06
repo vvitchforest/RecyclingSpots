@@ -5,28 +5,20 @@
 let searchButtonTop = document.getElementById('search_button_at_top');
 let locateButton = document.getElementById('locate_button');
 let infoButton = document.getElementById('info_button');
-let distanceContainer = document.getElementById('distance_container');
-let searchContainer = document.getElementById('search_container');
-let filterContainer = document.getElementById('filter_container');
-let infoContainer = document.getElementById('info_container');
 let filterButton = document.getElementById('filter_button');
 let mobileButton = document.getElementById('mobileButton');
 let defaultMapview = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&dist=15000&point=24.9384, 60.1699`;
-
 
 $(function() {
   $('.main_buttons').on(`hover`, function() {
     $(this).toggleClass('main_buttons:hover');
   });
   $(locateButton).on(`click`, function() {
-    $(distanceContainer).css("display", "flex");
-    $(searchContainer).hide();
-    $(infoContainer).hide();
-    $(filterContainer).show();
-    $(filterButton).show();
-    $(locateButton).addClass('main_buttonsClicked');
-    $(searchButtonTop).removeClass(`main_buttonsClicked`);
-    $(infoButton).removeClass(`main_buttonsClicked`);
+    $('#distance_container').css('display', 'flex');
+    $('#search_container,#info_container').hide();
+    $('#filter_container,#filter_button').show();
+    $('#search_button_at_top,#info_button').removeClass('main_buttonsClicked');
+    $('#locate_button').addClass('main_buttonsClicked');
     markers.clearLayers();
     if (myLocation === null) {
       navigator.geolocation.getCurrentPosition(userLocation, error);
@@ -36,41 +28,29 @@ $(function() {
     }
   });
   $(searchButtonTop).on(`click`, function() {
-    $(searchContainer).show();
-    $(filterContainer).show();
-    $(distanceContainer).hide();
-    $(infoContainer).hide();
-    $(filterButton).hide();
-    $(searchButtonTop).addClass('main_buttonsClicked');
-    $(locateButton).removeClass(`main_buttonsClicked`);
-    $(infoButton).removeClass(`main_buttonsClicked`);
-
+    $('#search_container,#filter_container').show();
+    $('#distance_container,#info_container,#filter_button').hide();
+    $('#locate_button,#info_button').removeClass('main_buttonsClicked');
+    $('#search_button_at_top').addClass('main_buttonsClicked');
     if (myLocation !== null) {
       map.removeLayer(userMarker);
     }
   });
-
   $(infoButton).on('click', function() {
-    $(infoContainer).css("display", "flex");
-    $(searchContainer).hide();
-    $(distanceContainer).hide();
-    $(filterButton).hide();
-    $(filterContainer).hide();
-    $(infoContainer).show();
-    $(infoButton).addClass('main_buttonsClicked');
-    $(locateButton).removeClass(`main_buttonsClicked`);
-    $(searchButtonTop).removeClass(`main_buttonsClicked`);
+    $('#info_container').css('display', 'flex');
+    $('#search_container,#distance_container,#filter_button,#filter_container').
+        hide();
+    $('#locate_button,#search_button_at_top').
+        removeClass('main_buttonsClicked');
+    $('#info_button').addClass('main_buttonsClicked');
   });
-
   $(mobileButton).on(`click`, function() {
-    if($(`#aside_id`).css('display') === 'block'){
-      $(`.aside`).hide();
+    if ($(`#aside_id`).css('display') === 'block') {
       $(`#arrow_icons_up`).show();
-      $(`#arrow_icons_down`).hide();
+      $(`#arrow_icons_down, .aside`).hide();
     } else {
-      $(`.aside`).show();
       $(`#arrow_icons_up`).hide();
-      $(`#arrow_icons_down`).show();
+      $(`#arrow_icons_down, .aside`).show();
     }
   });
 });
@@ -78,7 +58,7 @@ $(function() {
 //-----------------------------FILTERS-----------------------------------//
 /*Checkboxes*/
 const filterUl = document.getElementById('filter_ul');
-
+/* Fetches the available materials from the API, and creates a custom checkbox for each material. */
 fetch(
     `https://api.kierratys.info/materialtypes/?api_key=d77219adedf77de9a97e20d8bcbf436f354cc01d`).
     then(function(response) {
@@ -115,7 +95,6 @@ let map = L.map('mapview');
 
 const pinMarkerUser = L.divIcon({
   className: 'user_marker',
-
 });
 
 const pinMarkerIcon = L.divIcon({
@@ -137,7 +116,6 @@ const markers = L.markerClusterGroup({
       myCluster += 'medium';
       height = 50;
       width = 50;
-
     } else {
       myCluster += 'large';
       height = 70;
@@ -149,7 +127,6 @@ const markers = L.markerClusterGroup({
       className: myCluster,
       iconSize: new L.Point(height, width),
     });
-
   },
 });
 
@@ -167,7 +144,7 @@ function userLocation(pos) {
   myLocation = pos.coords;
   userMarker = L.marker([myLocation.latitude, myLocation.longitude],
       {icon: pinMarkerUser});
-  let userText = `<div id="userPopUp">Olen tässä</div>`
+  let userText = `<div id="userPopUp">Olen tässä</div>`;
   userMarker.
       addTo(map).
       bindPopup(userText);
@@ -181,7 +158,6 @@ function addMarker(crd, text, icon) {
   let marker = L.marker([crd.latitude, crd.longitude], {icon: icon}).
       bindPopup(text);
   markers.addLayer(marker);
-
 }
 
 search(checkboxes(defaultMapview));
@@ -196,7 +172,6 @@ searchButton.addEventListener('click', function() {
   let searchByCity = `https://api.kierratys.info/collectionspots/?api_key=8a6b510dcff18319e04b9863c027729b91b130d5&municipality=${searchInput.value}`;
   markers.clearLayers();
   search(checkboxes(searchByCity));
-
 });
 
 searchInput.addEventListener('keyup', function(e) {
@@ -222,9 +197,10 @@ filterButton.addEventListener('click', function() {
   search(checkboxes(searchByDistance));
 });
 
+/*A recursive function that fetches data from API*/
 function search(apiSearchUrl) {
   if ($('#filter_ul :checkbox:checked').length === 0) {
-    alert('Valitse ainakin yksi kierrätettävä materiaali');
+    alert('Valitse ainakin yksi kierrätettävä materiaali!');
   } else {
     $('.loader').show();
     $('#mapview').fadeTo('fast', 0.6);
@@ -248,6 +224,7 @@ function search(apiSearchUrl) {
   }
 }
 
+/*Checks which material checkboxes are checked and adds their filters to the fetch*/
 function checkboxes(apiURL) {
   const checkboxes = document.getElementsByClassName(`checkboxes`);
   for (let i = 0; i < checkboxes.length; i++) {
@@ -263,6 +240,7 @@ function checkboxes(apiURL) {
   return apiURL;
 }
 
+/*Handles the data from API by creating popups, calculating the distance between objects and filtering out objects with missing data */
 function handleData(data) {
   for (let i = 0; i < data.results.length; i++) {
     if (data.results[i].geometry !== null) {
@@ -270,7 +248,6 @@ function handleData(data) {
         longitude: data.results[i].geometry.coordinates[0],
         latitude: data.results[i].geometry.coordinates[1],
       };
-
       let recycleMaterial = [];
       for (let j = 0; j < data.results[i].materials.length; j++) {
         recycleMaterial += '<li class="material_list_item" style="list-style: none"><i class="fas fa-recycle"></i>&nbsp &nbsp' +
@@ -315,7 +292,7 @@ function handleData(data) {
   }
 }
 
-//Takes two geographical coordinate locations and calculates the distance between them. Returns meters
+/*Takes two geographical coordinate locations and calculates the distance between them. Returns meters*/
 function getDistance(coords, secondCoords) {
   let lon1 = toRadian(coords.longitude),
       lat1 = toRadian(coords.latitude),
@@ -330,10 +307,9 @@ function getDistance(coords, secondCoords) {
   let c = 2 * Math.asin(Math.sqrt(a));
   let EARTH_RADIUS = 6371;
   return c * EARTH_RADIUS * 1000;
-
 }
 
-//Converts degrees to radians
+/*Converts degrees to radians*/
 function toRadian(degree) {
   return degree * Math.PI / 180;
 }
