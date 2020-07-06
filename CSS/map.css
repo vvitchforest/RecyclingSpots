@@ -599,7 +599,7 @@ aside {
 
     .main_buttons p {
         font-size: 9px;
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
 
     .main_buttons i {
@@ -612,7 +612,6 @@ aside {
         bottom: 4vh;
         font-size: 12px;
     }
-
 
 }
 
