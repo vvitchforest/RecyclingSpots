@@ -1,1 +1,1 @@
-# EnvironmentProject
+# RecyclingSpots
