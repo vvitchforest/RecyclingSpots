@@ -6,7 +6,6 @@ body {
 
 main {
     height: 100vh;
-
 }
 
 aside {
@@ -48,12 +47,7 @@ aside {
     cursor: pointer;
 }
 
-/*.main_buttons:hover {
-    background-color: gray;
-} */
-
 .main_buttonsClicked div {
-    /*background-color: #424A45 !important;*/
     border: 1px solid #91CB3E !important;
 }
 
@@ -575,7 +569,7 @@ aside {
 
     .main_buttons p {
         font-size: 9px;
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
 
     .main_buttons i {
